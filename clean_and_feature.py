@@ -110,12 +110,12 @@ df = df.join(aggregatedf, on='id')
 df.head()
 
 # using datetime to make the above features
-df['Year'] = df['project_submitted_datetime'].dt.year
-df['Month'] = df['project_submitted_datetime'].dt.month
-df['Year_Day'] = df['project_submitted_datetime'].dt.dayofyear
-df['Month_Day'] = df['project_submitted_datetime'].dt.day
-df['Week_Day'] = df['project_submitted_datetime'].dt.weekday
-df['Hour'] = df['project_submitted_datetime'].dt.hour
+df['year'] = df['project_submitted_datetime'].dt.year
+df['month'] = df['project_submitted_datetime'].dt.month
+df['year_day'] = df['project_submitted_datetime'].dt.dayofyear
+df['month_day'] = df['project_submitted_datetime'].dt.day
+df['week_day'] = df['project_submitted_datetime'].dt.weekday
+df['hour'] = df['project_submitted_datetime'].dt.hour
 
 # fill empty values with missing token ' UNK '
 df['project_essay_3'] = df['project_essay_3'].fillna(missing_token)
@@ -137,7 +137,7 @@ df['text'] = df.apply(lambda row: ' '.join([str(row['project_essay_1']),
 # get our delicious features from that massive text
 df['char_count'] = df['text'].apply(len)
 df['word_count'] = df['text'].apply(lambda x: len(x.split()))
-df['word density'] = df['char_count'] / (df['word_count'] + 1)
+df['word_density'] = df['char_count'] / (df['word_count'] + 1)
 df['punctuation_count'] = df['text'].apply(lambda x: len("".join(_ for _ in x if _ in punctuation)))
 df['title_word_count'] = df['text'].apply(lambda x: len([word for word in x.split() if word.istitle()]))
 df['upper_case_word_count'] = df['text'].apply(lambda x: len([word for word in x.split() if word.isupper()]))
