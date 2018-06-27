@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <!-- CDNS -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2" id ="citySelect">
+                    <p>SELECT City</p>
+                    <select id ="selCity" onchange="somethingChanged(this.value)">
+                    </select>
+                </div>
+                <div class="col-md-2" id = "monthSelect">
+                    <p>SELECT Month</p>
+                    <select id = "selMonth" onchange="somethingChanged(this.value)">
+                    </select>
+                </div>
+                <div class="col-md-2" id ="typeSelect">
+                    <p>SELECT Data</p>
+                    <select id = "selType" onchange="somethingChanged(this.value)">
+                    </select>
+                </div>
+            </div>
+            <!-- Graph-Containing Divs -->
+            <div id="first_graph" style="width:1000px; height:500px;"></div>
+            <div id="second_graph" style="width:1000px; height:500px;"></div>
+            <div id="third_graph" style="width:1000px; height:500px;"></div>
+        
+        </div>
+        <!-- Javascript File -->
+        <script type="text/javascript" src="static/js/script.js"></script>
+        
+    </body>
+</html>
