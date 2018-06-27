@@ -31,10 +31,12 @@ dtype = {
     'teacher_number_of_previously_posted_projects': int,
     'project_is_approved': np.uint8,
 }
-data_path = os.path.join('..', 'input')
-train = pd.read_csv(os.path.join(data_path, 'train.csv'), dtype=dtype, low_memory=True)
-test = pd.read_csv(os.path.join(data_path, 'test.csv'), dtype=dtype, low_memory=True)
-res = pd.read_csv(os.path.join(data_path, 'resources.csv'))
+
+data_path = "D:\\uci_data\\donorschoose-application-screening\\"
+train = pd.read_csv(os.path.join(data_path, 'train\\train.csv'), dtype=dtype, low_memory=True)
+test = pd.read_csv(os.path.join(data_path, 'test\\test.csv'), dtype=dtype, low_memory=True)
+res = pd.read_csv(os.path.join(data_path, 'resources\\resources.csv'))
+
 
 print(train.head())
 # print(test.head())
@@ -313,9 +315,13 @@ for train_index, valid_index in kf.split(X):
     cnt += 1
     if cnt > 0: # Comment this to run several folds
         break
-
-    del model, lgb_train, lgb_valid, p
+    
+    del lgb_train, lgb_valid, p
     gc.collect
+
+print('Save model...')
+ # save model to file
+model.save_model('D:/uci_data/lgb.txt')
 
 auc_mean = np.mean(auc_buf)
 auc_std = np.std(auc_buf)
