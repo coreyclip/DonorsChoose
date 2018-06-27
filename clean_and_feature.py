@@ -16,7 +16,6 @@ import string
 import collections
 
 import matplotlib.pyplot as plt
-%matplotlib inline
 
 def blob_the_text(text):
     """
