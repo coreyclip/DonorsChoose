@@ -2,6 +2,7 @@ import gc
 import numpy as np
 import pandas as pd
 import os
+import json
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import roc_auc_score
@@ -39,7 +40,6 @@ res = pd.read_csv(os.path.join(data_path, 'resources\\resources.csv'))
 
 
 print(train.head())
-# print(test.head())
 print(train.shape, test.shape)
 
 
@@ -212,6 +212,8 @@ for c_i, c in tqdm(enumerate(cols)):
     del tfidf, tfidf_train, tfidf_test
     gc.collect()
 
+
+df_all.to_csv('D:/uci_data/all.csv')
 print('Done.')
 del df_all
 gc.collect()
@@ -246,6 +248,8 @@ kf = RepeatedKFold(
     random_state=0)
 auc_buf = []
 
+
+counter = 1
 for train_index, valid_index in kf.split(X):
     print('Fold {}/{}'.format(cnt + 1, n_splits))
     params = {
@@ -286,6 +290,15 @@ for train_index, valid_index in kf.split(X):
         verbose_eval=100,
     )
 
+    # dump model to json (and save to file)
+    print(f'Dump model to JSON... version{counter}')
+    model_json = model.dump_model()
+
+    with open(f'D:/uci_data/model_v{counter}.json', 'w+') as f:
+        json.dump(model_json, f, indent=4)
+
+    counter += 1
+
     if cnt == 0:
         importance = model.feature_importance()
         model_fnames = model.feature_name()
@@ -316,21 +329,19 @@ for train_index, valid_index in kf.split(X):
     if cnt > 0: # Comment this to run several folds
         break
     
-    del lgb_train, lgb_valid, p
+    del model, lgb_train, lgb_valid, p
     gc.collect
 
-print('Save model...')
- # save model to file
-model.save_model('D:/uci_data/lgb.txt')
+
 
 auc_mean = np.mean(auc_buf)
 auc_std = np.std(auc_buf)
 print('AUC = {:.6f} +/- {:.6f}'.format(auc_mean, auc_std))
 
-preds = p_buf/cnt
+# preds = p_buf/cnt
 
 # Prepare submission
-subm = pd.DataFrame()
-subm['id'] = id_test
-subm['project_is_approved'] = preds
-subm.to_csv('submission.csv', index=False)
+# subm = pd.DataFrame()
+# subm['id'] = id_test
+# subm['project_is_approved'] = preds
+# subm.to_csv('submission.csv', index=False)
