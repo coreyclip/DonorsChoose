@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
-	"use strict";
+  "use strict";
+  var counter = 0;
 
 	var window_width 	 = $(window).width(),
 	window_height 		 = window.innerHeight,
@@ -19,6 +20,18 @@ $(document).ready(function(){
   //------- Active Nice Select --------//
      $('select').niceSelect();
      
+     
+   // -------   Active Mobile Menu-----//
+
+  $(".menu-bar").on('click', function(e){
+      e.preventDefault();
+      $("nav").toggleClass('hide');
+      $("span", this).toggleClass("lnr-menu lnr-cross");
+      $(".main-menu").addClass('mobile-menu');
+  });
+
+
+  $('.nav-item a:first').tab('show');
 
 
 
@@ -59,5 +72,6 @@ $(document).ready(function(){
       }
     });
 
-
+    
+ 
  });
