@@ -1,0 +1,34 @@
+.SearchBar input {
+    height: 50px;
+    width: 500px;
+    font-size: 20px;
+}
+body, html {height: 100%}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
+.menu {display: none}
+.bgimg {
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-image: url("../images/sunny_weather.jpg");
+   min-height: 100%;
+}
+.DateSearch input {
+    height: 50px;
+    width: 300px;
+    font-size: 20px;
+}
+
+.p{ 
+    font-size: 150%;
+    font-family: 'Pompiere', cursive;
+}
+
+.h-quote {
+    font-size:200%;
+    font-family: 'Monoton', cursive;
+}
+
+.h {
+    font-size:200%;
+    font-family: 'Oleo Script', cursive;
+}

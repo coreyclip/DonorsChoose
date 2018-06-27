@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>picture collage</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Actor|Monoton" rel="stylesheet">
+        
+
+</head>
+
+<body>
+        <!-- Picture Collage Space -->
+        <div class='w3-border-red w3-bottombar' style="margin-bottom:22px;"><h2 class='h'>Images from Wikipedia of your Destination</h2></div>
+        <div class="w3-display-container">
+            
+            <div id="collage" class='row' style="height:300px;"></div>      
+                
+        </div>
+
+        <div class="w3-display-container" id = "aboutUs_link" style="width:100%; height:200px;">
+            <div class="w3-display-bottommiddle" id="aboutUs" style="width:90%;">
+                <div class='text-center' style="margin:auto; width:500px; padding-bottom:30px;">
+                <div class='w3-border-red w3-bottombar'><h2 class='h'>About Us</h2></div>        
+                <p class='p'>
+                    This project was completed as a part of the <a class='orange' href="https://bootcamp.ce.uci.edu/data/">UCI Data Analytics Bootcamp</a>
+                    by <a class='orange' href="https://github.com/coreyclip">Corey Clippinger </a>, <a class='orange' href="https://github.com/totopi/">Kevin McNalley</a>, <a class='orange' href="https://github.com/gazellebahramian">Gazelle Bahramianfard</a>,
+                    and <a class='orange' href='https://github.com/chrisprabhu'>Chris Prabhu</a>. We used a MySQL database to store our weather and airport data, a Flask backend written in Python, and graphs and animations powered by javascript. 
+                </p>
+                </div>
+            </div>
+        </div>
+	
+	
+<script>
+
+url = "/city_pics/Portland"
+
+function renderPics(){
+    // this stuff is for when it's actually in the main page and can grab city
+    //let city = document.querySelector("#selCity").value;
+    //let picUrl = `/city_pics/${city}`
+    d3.json(url,function(err, urlData){
+        if (err) throw err;
+        let picSpots = d3.select('.collage')
+                        .data(urlData)
+                        .enter()
+                        .append("div")
+                        .classed('col-md-4 thumbnail img', true)
+                        .html(function(d){
+                            return `<img src="${d}" style="width:100px;height:300px;">`
+                        })
+        
+    });
+};
+
+renderPics();
+
+</script>
+
+
+</body>
+
+</html>
