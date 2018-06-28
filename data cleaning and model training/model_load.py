@@ -11,5 +11,5 @@ except BaseException:
 
 # load model to predict
 print('Load model to predict')
-lgb = lgb.Booster(model_file='lgb.txt')
+lgb = lgb.Booster(model_file='model_v1.json')
 print('model loaded')

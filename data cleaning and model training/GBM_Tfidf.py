@@ -301,7 +301,7 @@ for train_index, valid_index in kf.split(X):
         json.dump(model_json, f, indent=4)
 
     # dump model with pickle
-    with open('{output_folder}/model_v{counter}.pkl', 'wb') as fout:
+    with open(f'{output_folder}/model_v{counter}.pkl', 'wb') as fout:
         pickle.dump(model, fout)
 
     counter += 1
