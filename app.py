@@ -25,7 +25,7 @@ def home():
 @app.route("/results/<submission>")
 def predict(submission):
     #cleaned = clean(submission)
-    preds = model.predict([1,1,1,1,1,1,1,11,1,1,1,1,1,1,1,1,1,1])
+    
 
     prediction = {"results":'none'}
     return jsonify(prediction)
