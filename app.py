@@ -3,6 +3,16 @@
 # Dependencies
 from flask import Flask, render_template, jsonify, redirect, send_from_directory
 import pandas as pd
+import lightgbm as lgb
+import numpy as np
+
+try:
+    import cPickle as pickle
+except BaseException:
+    import pickle
+
+with open('model_v1.pkl', 'rb') as fin:
+    model = pickle.load(fin)
 
 app = Flask(__name__)
 
@@ -10,6 +20,19 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/results/<submission>")
+def predict(submission):
+    #cleaned = clean(submission)
+    preds = model.predict([1,1,1,1,1,1,1,11,1,1,1,1,1,1,1,1,1,1])
+
+    prediction = {"results":'none'}
+    return jsonify(prediction)
+
+
+
+#this stuff just makes it easier for flask to grab static files
 
 @app.route('/js/<path:path>')
 def send_js(path):
@@ -21,10 +44,6 @@ def send_css(path):
 
 
 
-@app.route("/results/<submission>")
-def predict(submission):
-    prediction = {"results":'none'}
-    return jsonify(prediction)
 
 if __name__ == "__main__":
     app.run(debug=True)
