@@ -13,3 +13,7 @@ except BaseException:
 print('Load model to predict')
 lgb = lgb.Booster(model_file='model_v1.json')
 print('model loaded')
+
+
+with open('model_v1.pkl', 'rb') as fin:
+    pkl_bst = pickle.load(fin)
