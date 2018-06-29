@@ -21,7 +21,7 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/form', methods=['POST'])
+@app.route('/form', methods=['GET', 'POST'])
 def form():
     # take in data from form
     if request.method == 'POST':
