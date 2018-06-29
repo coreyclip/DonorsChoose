@@ -75,3 +75,13 @@ $(document).ready(function(){
     
  
  });
+
+
+ // currency input
+ $(document).ready(function()
+ {
+     $('.currency').blur(function()
+     {
+         $('.currency').formatCurrency();
+     });
+ });

@@ -597,9 +597,11 @@ pre code {
 .container {
   margin-right: auto;
   margin-left: auto;
+  margin-top: auto;
   padding-right: 15px;
   padding-left: 15px;
   width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 576px) {
@@ -632,14 +634,15 @@ pre code {
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: 100%;
+  height: 100%;
 }
 
 .row {
-  display: flex;
+  display: -webkit-box;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  height: 100%;
 }
 
 .no-gutters {
@@ -664,6 +667,7 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top:150px
 }
 
 .col {
