@@ -5,11 +5,7 @@ from flask import Flask, render_template, jsonify, redirect, send_from_directory
 import pandas as pd
 import lightgbm as lgb
 import numpy as np
-
-try:
-    import cPickle as pickle
-except BaseException:
-    import pickle
+import pickle
 
 # our modules
 import processInput
@@ -24,6 +20,13 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route('/form', methods=['GET', 'POST'])
+def form():
+    return render_template('form.html')
+
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
 
 @app.route("/results/<submission>")
 def predict(submission):
