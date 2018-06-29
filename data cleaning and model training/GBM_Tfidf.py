@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import os
 import json
+import pickle
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import roc_auc_score
@@ -11,6 +12,8 @@ from sklearn.preprocessing import LabelEncoder
 
 from tqdm import tqdm
 import lightgbm as lgb
+
+output_folder = 'D:/uci_data/'
 
 
 # Load Data
@@ -213,7 +216,7 @@ for c_i, c in tqdm(enumerate(cols)):
     gc.collect()
 
 
-df_all.to_csv('D:/uci_data/all.csv')
+df_all.to_csv(f'{output_folder}/all.csv')
 print('Done.')
 del df_all
 gc.collect()
@@ -294,8 +297,12 @@ for train_index, valid_index in kf.split(X):
     print(f'Dump model to JSON... version{counter}')
     model_json = model.dump_model()
 
-    with open(f'D:/uci_data/model_v{counter}.json', 'w+') as f:
+    with open(f'{output_folder}/model_v{counter}.json', 'w+') as f:
         json.dump(model_json, f, indent=4)
+
+    # dump model with pickle
+    with open(f'{output_folder}/model_v{counter}.pkl', 'wb') as fout:
+        pickle.dump(model, fout)
 
     counter += 1
 

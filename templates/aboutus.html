@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+        <!--Site Name-->
+        <title>Donors Choose</title>
+        <meta charset="UTF-8">
+        
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="css/linearicons.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+
+    <body>
+            <div class="spinner-wrapper">
+                    <div class="spinner"></div>
+                    </div>
+
+    <!--start header-->
+        <header class="default-header">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="header-top d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="#home"><img src="img/logo.png" alt="logo" style="width:300px;"></a>
+                        </div>
+                        <div class="main-menubar d-flex align-items-center">
+                            <nav class="hide">
+                                    <a href="index.html">Home</a>
+                                    <a href="aboutus.html">About Us</a>
+                                    <a href="form.html">Get Your Project Funded</a>
+                            </nav>
+                            <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--end header-->
+
+        <!-- start about us Area -->
+        <section class="banner-area relative" id="home">
+                <div class="container">
+                        <div class="row fullscreen align-items-center justify-content-center">
+                            <div class="banner-content col-lg-6 col-md-12">
+                                <p>
+                                    To be fixed... 
+                                </p>
+                            </div>
+                        </div>
+                </div>
+            </section>
+        <!-- End about us Area -->
+
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script> <!--Bootstrap-->
+        <script src="js/jquery.nice-select.min.js"></script> <!--Dropdown for nav-bar-->
+        <script src="js/jquery.sticky.js"></script> <!--sticky nav-bar-->
+        <script src="js/parallax.min.js"></script> <!--Scroll effect-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/main.js"></script>
+        
+        <!-- Loading Screen -->
+                <script>
+                    $(document).ready(function() {
+                    //Preloader
+                    $(window).on("load", function() {
+                    preloaderFadeOutTime = 1500;
+                    function hidePreloader() {
+                    var preloader = $('.spinner-wrapper');
+                    preloader.fadeOut(preloaderFadeOutTime);
+                    }
+                    hidePreloader();
+                    });
+                    });
+        </script>
+    </body>
+ 
+    </html>
