@@ -11,6 +11,9 @@ try:
 except BaseException:
     import pickle
 
+# our modules
+import processInput
+
 with open('model_v1.pkl', 'rb') as fin:
     model = pickle.load(fin)
 
