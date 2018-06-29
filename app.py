@@ -6,6 +6,7 @@ import pandas as pd
 import lightgbm as lgb
 import numpy as np
 import pickle
+import requests
 
 # our modules
 import processInput
@@ -20,8 +21,31 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/form', methods=['GET', 'POST'])
+@app.route('/form', methods=['POST'])
 def form():
+    # take in data from form
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        school = request.form.get('school')
+        city = request.form.get('city')
+        state = request.form.get('state')
+        price = request.form.get('currencyField')
+        subject = request.form.get('subject')
+        input = {
+            'name':name,
+            'email':email, 
+            'school':school,
+            'city':city,
+            'state':state,
+            'price':price,
+            'subject':subject,
+            }
+        print(input)
+        pass # stuff happens
+    else:
+        #stuff didn't happen
+        pass
     return render_template('form.html')
 
 @app.route('/aboutus')
