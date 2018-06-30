@@ -1,4 +1,3 @@
-import gc
 import numpy as np
 import pandas as pd
 import os
@@ -9,7 +8,6 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import KFold, RepeatedKFold
 from sklearn.preprocessing import LabelEncoder
 
-from tqdm import tqdm
 import lightgbm as lgb
 
 # Load Data
@@ -60,7 +58,7 @@ def processInput(donorsDictionary):
         'project_essay_4'], axis=1, inplace=True)
 
     df_all = test
-    gc.collect()
+    
 
     res = pd.DataFrame(res[['id', 'quantity', 'price']].groupby('id').agg(\
         {
@@ -89,7 +87,7 @@ def processInput(donorsDictionary):
     print(res.head())
     test = test.merge(res, on='id', how='left')
     del res
-    gc.collect()
+    
 
     # Preprocess columns with label encoder
     print('Label Encoder...')
@@ -110,7 +108,7 @@ def processInput(donorsDictionary):
         test[d] = le.transform(test[c].astype(str))
         test.drop([c], axis=1, inplace=True)
     del le
-    gc.collect()
+    
     # print('Done.')
 
 
@@ -154,7 +152,7 @@ def processInput(donorsDictionary):
     for i in range(n_features[0]):
             test[c + '_tfidf_' + str(i)] = tfidf_test[:, i]
     del project_title_tfidf, tfidf_test
-    gc.collect()
+    
     print('project_title_tfidf Done.')
 
     with open('project_essay_tfidf.pk', 'rb') as f:
@@ -170,7 +168,7 @@ def processInput(donorsDictionary):
     for i in range(n_features[1]):
             test[c + '_tfidf_' + str(i)] = tfidf_test[:, i]
     del project_essay_tfidf, tfidf_test
-    gc.collect()
+    
     print('project_essay_tfidf Done.')
 
     with open('project_resource_summary_tfidf.pk', 'rb') as f:
@@ -186,7 +184,7 @@ def processInput(donorsDictionary):
     for i in range(n_features[2]):
             test[c + '_tfidf_' + str(i)] = tfidf_test[:, i]
     del project_resource_summary_tfidf, tfidf_test
-    gc.collect()
+    
     print('project_resource_summary_tfidf Done.')
 
     # Prepare data
@@ -202,7 +200,7 @@ def processInput(donorsDictionary):
     id_test = test['id'].values
 
     del test
-    gc.collect()
+    
 
     # load model to predict
 
