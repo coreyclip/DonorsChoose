@@ -57,8 +57,9 @@
                                             <input type="text" name="school" placeholder="Your School Name...",value="{{request.form.school}}">
                                             <input type="text" name="city" placeholder="Your School's City...",value="{{request.form.city}}">
                                             <input type="text" name="state" placeholder="Your School's State...",value="{{request.form.state}}">
+                                            <input type="text" name="topic" placeholder="How many times have you applied before...",value="{{request.form.state}}">                                            
                                             <textarea name="about_school" placeholder="About Yourself/School....",value="{{request.form.about_school}}"></textarea>
-                                            <input type="text" name='price' id="currencyField" placeholder="Grant Amount Being Requested...", value="{{request.form.price}}">
+                                            <input type="text" name='price' id="currencyField" placeholder="Grant Amount Being Requested...">
                                             <label for="subject">Subject of Research/Classroom Project</label>
                                         <select id="subject" name="subject">
                                             <optgroup label="subjects">
@@ -70,13 +71,24 @@
                                                 <option value="foreignlanguage">Foreign Language</option>
                                                 <option value="other">Other</option>
                                             </optgroup>
-                                        </select>  
-                                        <p>{{error}}</p>   
+                                        <label for="title">Your title</label>
+                                            <select id="subject" name="title">
+                                                <optgroup label="title">
+                                                    <option value="Mr.">Mr.</option>
+                                                    <option value="Ms.">Ms.</option>
+                                                    <option value="Dr.">Dr.</option>
+                                                    <option value="Mrs.">Mrs.</option>
+                                                    <option value="Teacher">Teacher</option>
+                                                </optgroup>
+                                            <legend><span class="number"></span> Essays</legend>
+                                    <label for="essay">"Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful."</label>
+  
+                                        <textarea name="essay" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px" value="{{request.form.essay}}"></textarea>
+                                    
+                                    <label for="essay2">"About your project: How will these materials make a difference in your students' learning and improve their school lives?"</label>
+                                        
+                                        <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px" value="{{request.form.essay}}"></textarea>
                                     </fieldset>
-                                <fieldset>
-                                    <legend><span class="number"></span> Essay</legend>
-                                    <textarea name="field3" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px" value="{{request.form.essay}}"></textarea>
-                                </fieldset>
                                 <input type="submit" value="See Your Results..." />
                                 </form>
                                 </div>

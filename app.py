@@ -25,23 +25,25 @@ def form():
     # take in data from form
     
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
+        #name = request.form.get('name')
+        #email = request.form.get('email')
         school = request.form.get('school')
         city = request.form.get('city')
         state = request.form.get('state')
         essay = request.form.get('essay')
         price = request.form.get('price')
         subject = request.form.get('subject')
+        topic = request.form.get('topic')
         about_school = request.form.get('about_school')
         user_input = {
-            'name':name,
-            'email':email, 
+            #'name':name,
+            #'email':email, 
             'school':school,
             'about_school':about_school,
             'city':city,
             'state':state,
             'price':price,
+            'topic':topic,
             'essay':essay,
             'subject':subject,
             }
