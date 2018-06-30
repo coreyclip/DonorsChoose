@@ -3,10 +3,8 @@ import numpy as np
 import pandas as pd
 import os
 
-try:
-    import cPickle as pickle
-except BaseException:
-    import pickle
+
+import pickle
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import roc_auc_score

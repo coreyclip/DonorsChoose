@@ -52,16 +52,16 @@
                                 <form method=post enctype=multipart/form-data>
                                     <fieldset>
                                         <legend><span class="number">1</span> Candidate Info</legend>
-                                            <input type="text" name="name" placeholder="Your Name...">
-                                            <input type="email" name="email" placeholder="Your Email...">
-                                            <input type="text" name="school" placeholder="Your School Name...">
-                                            <input type="text" name="city" placeholder="Your School's City...">
-                                            <input type="text" name="state" placeholder="Your School's State...">
-                                            <textarea name="field3" placeholder="About Yourself/School...."></textarea>
-                                            <input type="text" id="currencyField" placeholder="Grant Amount Being Requested..." />
+                                            <input type="text" name="name" placeholder="Your Name...",value="{{request.form.name}}" >
+                                            <input type="email" name="email" placeholder="Your Email...",value="{{request.form.email}}">
+                                            <input type="text" name="school" placeholder="Your School Name...",value="{{request.form.school}}">
+                                            <input type="text" name="city" placeholder="Your School's City...",value="{{request.form.city}}">
+                                            <input type="text" name="state" placeholder="Your School's State...",value="{{request.form.state}}">
+                                            <textarea name="field3" placeholder="About Yourself/School....",value="{{request.form.about_school}}"></textarea>
+                                            <input type="text" id="currencyField" placeholder="Grant Amount Being Requested...", value="{{request.form.price}}" />
                                             <label for="subject">Subject of Research/Classroom Project</label>
                                         <select id="subject" name="field6">
-                                            <optgroup label="subjects">
+                                            <optgroup label="subjects",value="{{request.form.subject}}">
                                                 <option value="math">Math</option>
                                                 <option value="english">English</option>
                                                 <option value="science">Science</option>
@@ -70,11 +70,12 @@
                                                 <option value="foreignlanguage">Foreign Language</option>
                                                 <option value="other">Other</option>
                                             </optgroup>
-                                        </select>     
+                                        </select>  
+                                        <p>{{error}}</p>   
                                     </fieldset>
                                 <fieldset>
                                     <legend><span class="number">2</span> Essay</legend>
-                                    <textarea name="field3" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <textarea name="field3" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px" value="{{request.form.essay}}"></textarea>
                                 </fieldset>
                                 <input type="submit" value="See Your Results..." />
                                 </form>

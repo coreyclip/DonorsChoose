@@ -1,7 +1,7 @@
 # The application
 
 # Dependencies
-from flask import Flask, render_template, jsonify, redirect, send_from_directory
+from flask import Flask, session, render_template, request, flash, jsonify, redirect, send_from_directory, url_for
 import pandas as pd
 import lightgbm as lgb
 import numpy as np
@@ -11,8 +11,6 @@ import requests
 # our modules
 import processInput
 
-with open('model_v1.pkl', 'rb') as fin:
-    model = pickle.load(fin)
 
 app = Flask(__name__)
 
@@ -21,38 +19,50 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/form', methods=['GET', 'POST'])
+@app.route('/form/', methods=['GET', 'POST'])
 def form():
+    error = ''
     # take in data from form
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        school = request.form.get('school')
-        city = request.form.get('city')
-        state = request.form.get('state')
-        price = request.form.get('currencyField')
-        subject = request.form.get('subject')
-        input = {
-            'name':name,
-            'email':email, 
-            'school':school,
-            'city':city,
-            'state':state,
-            'price':price,
-            'subject':subject,
-            }
-        print(input)
-        pass # stuff happens
-    else:
-        #stuff didn't happen
-        pass
-    return render_template('form.html')
-
+    try:
+        if request.method == 'POST':
+            name = request.form.get('name')
+            email = request.form.get('email')
+            school = request.form.get('school')
+            city = request.form.get('city')
+            state = request.form.get('state')
+            essay = request.form.get('essay')
+            price = request.form.get('price')
+            subject = request.form.get('subject')
+            about_school = request.form.get('about_school')
+            user_input = {
+                'name':name,
+                'email':email, 
+                'school':school,
+                'about_school':about_school,
+                'city':city,
+                'state':state,
+                'price':float(price),
+                'essay':essay,
+                'subject':subject,
+                }
+            print(user_input)
+            processed_input = processInput.processInput(user_input)
+            print(processed_input)
+        else:
+            #stuff didn't happen
+            pass
+        return render_template('form.html', error=error)
+    except Exception as e:
+        flash(e)
+        error = 'Invalid Entry. Try Again.'
+        if not float(price.strip('$')):
+            error = error + " Invalid price entry"
+        return render_template('form.html', error=error)
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html')
 
-@app.route("/results/<submission>")
+@app.route("/results/<submission>", methods=['GET'])
 def predict(submission):
     #cleaned = clean(submission)
     
@@ -76,4 +86,6 @@ def send_css(path):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.secret_key = 'my unobvious secret key'
+    app.debug = True
+    app.run()
