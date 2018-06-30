@@ -8,3 +8,6 @@ Untitled1.ipynb
 .ipynb_checkpoints/Untitled1-checkpoint.ipynb
 *.csv
 *.ipynb
+.DS_Store
+Graphs/.DS_Store
+Graphs/.DS_Store
