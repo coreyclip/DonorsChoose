@@ -1,7 +1,7 @@
 # The application
 
 # Dependencies
-from flask import Flask, request, render_template, jsonify, redirect, send_from_directory
+from flask import Flask, session, render_template, request, flash, jsonify, redirect, send_from_directory, url_for
 import pandas as pd
 import lightgbm as lgb
 import numpy as np
@@ -11,9 +11,6 @@ import requests
 # our modules
 import processInput
 from import_lists import import_lists
-
-with open('model_v1.pkl', 'rb') as fin:
-    model = pickle.load(fin)
 
 app = Flask(__name__)
 
@@ -28,26 +25,34 @@ def home2():
 
 @app.route('/form.html', methods=['GET', 'POST'])
 def form():
+    error = ''
     # take in data from form
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
+        #name = request.form.get('name')
+        #email = request.form.get('email')
         school = request.form.get('school')
         city = request.form.get('city')
         state = request.form.get('state')
-        price = request.form.get('currencyField')
+        essay = request.form.get('essay')
+        price = request.form.get('price')
         subject = request.form.get('subject')
-        input = {
-            'name':name,
-            'email':email, 
+        topic = request.form.get('topic')
+        about_school = request.form.get('about_school')
+        user_input = {
+            #'name':name,
+            #'email':email, 
             'school':school,
+            'about_school':about_school,
             'city':city,
             'state':state,
             'price':price,
+            'topic':topic,
+            'essay':essay,
             'subject':subject,
             }
-        print(input)
-        pass # stuff happens
+        print(user_input)
+        #processed_input = processInput.processInput(user_input)
+        #print(processed_input)
     else:
         dropdowns = import_lists()
         print(dropdowns)
@@ -81,4 +86,6 @@ def send_css(path):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.secret_key = 'my unobvious secret key'
+    app.debug = True
+    app.run()

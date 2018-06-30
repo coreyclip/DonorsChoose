@@ -60,16 +60,40 @@
                                             <textarea name="field3" placeholder="About Yourself/School...."></textarea>
                                             <input type="text" id="currencyField" placeholder="Grant Amount Being Requested..." />
                                             <label for="subject">Subject of Research/Classroom Project</label>
-                                        <select id="subject" name="field6">
-                                            <optgroup label="subjects">
-                                                <option value="math">Math</option>
-                                                <option value="english">English</option>
-                                                <option value="science">Science</option>
-                                                <option value="reading">Reading</option>
-                                                <option value="art">Art</option>
-                                                <option value="foreignlanguage">Foreign Language</option>
-                                                <option value="other">Other</option>
+                                        <select id="grade" name="grade">
+                                            <optgroup label="grades">
+                                                {% for grade in dropdowns.project_grade_category %}
+                                                <option value="{{ grade }}">{{ grade }}</option>
+                                                {% endfor %}
                                             </optgroup>
+                                        </select>
+                                        <select id="subject" name="subject">
+                                            <optgroup label="subjects">
+                                                {% for subject in dropdowns.project_subject_categories %}
+                                                <option value="{{ subject }}">{{ subject }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                        <select id="subjectSubcat" name="subjectSubcat">
+                                            <optgroup label="subjectSubcats">
+                                                {% for subsubject in dropdowns.project_subject_subcategories %}
+                                                <option value="{{ subsubject }}">{{ subsubject }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                        <select id="prefix" name="prefix">
+                                            <optgroup label="prefixes">
+                                                {% for prefix in dropdowns.teacher_prefix %}
+                                                <option value="{{ prefix }}">{{ prefix }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                        <select id="state" name="state">
+                                            <optgroup label="states">
+                                                {% for state in dropdowns.school_state %}
+                                                <option value="{{ state }}">{{ state }}</option>
+                                                {% endfor %}
+                                            </optgroup>                                                        
                                         </select>     
                                     </fieldset>
                                 <fieldset>
