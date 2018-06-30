@@ -57,11 +57,11 @@
                                             <input type="text" name="school" placeholder="Your School Name...",value="{{request.form.school}}">
                                             <input type="text" name="city" placeholder="Your School's City...",value="{{request.form.city}}">
                                             <input type="text" name="state" placeholder="Your School's State...",value="{{request.form.state}}">
-                                            <textarea name="field3" placeholder="About Yourself/School....",value="{{request.form.about_school}}"></textarea>
-                                            <input type="text" id="currencyField" placeholder="Grant Amount Being Requested...", value="{{request.form.price}}" />
+                                            <textarea name="about_school" placeholder="About Yourself/School....",value="{{request.form.about_school}}"></textarea>
+                                            <input type="text" name='price' id="currencyField" placeholder="Grant Amount Being Requested...", value="{{request.form.price}}">
                                             <label for="subject">Subject of Research/Classroom Project</label>
-                                        <select id="subject" name="field6">
-                                            <optgroup label="subjects",value="{{request.form.subject}}">
+                                        <select id="subject" name="subject">
+                                            <optgroup label="subjects">
                                                 <option value="math">Math</option>
                                                 <option value="english">English</option>
                                                 <option value="science">Science</option>

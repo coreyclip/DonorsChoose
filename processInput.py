@@ -57,7 +57,6 @@ def processInput(donorsDictionary):
         'project_essay_1', 
         'project_essay_2', 
         'project_essay_3', 
-<<<<<<< HEAD
         'project_essay_4'], axis=1, inplace=True)
 
     df_all = test
@@ -96,46 +95,6 @@ def processInput(donorsDictionary):
     print('Label Encoder...')
     cols = [
         'teacher_id', 
-=======
-        'project_essay_4',
-        'teacher_id'], axis=1, inplace=True)
-
-    # df_all = test
-    gc.collect()
-
-    # res = pd.DataFrame(res[['id', 'quantity', 'price']].groupby('id').agg(\
-    #     {
-    #         'quantity': [
-    #             'sum',
-    #             'min', 
-    #             'max', 
-    #             'mean', 
-    #             'std', 
-    #             # lambda x: len(np.unique(x)),
-    #         ],
-    #         'price': [
-    #             'count', 
-    #             'sum', 
-    #             'min',
-    #             'max', 
-    #             'mean', 
-    #             'std', 
-    #             lambda x: len(np.unique(x)),
-    #         ]}
-    #     )).reset_index()
-    # res.columns = ['_'.join(col) for col in res.columns]
-    # res.rename(columns={'id_': 'id'}, inplace=True)
-    # res['mean_price'] = res['price_sum']/res['quantity_sum']
-
-    # print(res.head())
-    # test = test.merge(res, on='id', how='left')
-    # del res
-    # gc.collect()
-
-    # Preprocess columns with label encoder
-    # print('Label Encoder...')
-    cols = [
->>>>>>> kevin
         'teacher_prefix', 
         'school_state', 
         'project_grade_category', 
@@ -143,33 +102,6 @@ def processInput(donorsDictionary):
         'project_subject_subcategories'
     ]
 
-<<<<<<< HEAD
-    for c in tqdm(cols):
-        le = LabelEncoder()
-        le.fit(df_all[c].astype(str))
-        test[c] = le.transform(test[c].astype(str))
-    del le
-    gc.collect()
-    print('Done.')
-
-
-    # Preprocess timestamp
-    print('Preprocessing timestamp...')
-    def process_timestamp(df):
-        df['year'] = df['project_submitted_datetime'].apply(lambda x: int(x.split('-')[0]))
-        df['month'] = df['project_submitted_datetime'].apply(lambda x: int(x.split('-')[1]))
-        df['date'] = df['project_submitted_datetime'].apply(lambda x: int(x.split(' ')[0].split('-')[2]))
-        df['day_of_week'] = pd.to_datetime(df['project_submitted_datetime']).dt.weekday
-        df['hour'] = df['project_submitted_datetime'].apply(lambda x: int(x.split(' ')[-1].split(':')[0]))
-        df['minute'] = df['project_submitted_datetime'].apply(lambda x: int(x.split(' ')[-1].split(':')[1]))
-        df['project_submitted_datetime'] = pd.to_datetime(df['project_submitted_datetime']).values.astype(np.int64)
-
-    process_timestamp(test)
-    print('Done.')
-
-    # Preprocess text
-    print('Preprocessing text...')
-=======
     for c in cols:
         filename = c + '_encoder.pk'
         with open(filename, 'rb') as f:
@@ -198,7 +130,6 @@ def processInput(donorsDictionary):
 
     # Preprocess text
     # print('Preprocessing text...')
->>>>>>> kevin
     cols = [
         'project_title', 
         'project_essay', 
@@ -209,7 +140,6 @@ def processInput(donorsDictionary):
         4040, 
         400,
     ]
-<<<<<<< HEAD
 
     with open('project_title_tfidf.pk', 'rb') as f:
         project_title_tfidf = pickle.load(f)
@@ -258,23 +188,6 @@ def processInput(donorsDictionary):
     del project_resource_summary_tfidf, tfidf_test
     gc.collect()
     print('project_resource_summary_tfidf Done.')
-=======
-    
-    for c in cols:
-        d = 0
-        filename = c + '_tfidf.pk'
-        with open(filename, 'rb') as f:
-            tfidf = pickle.load(f)
-    
-        tfidf_test = np.array(tfidf.transform(test[c]).toarray(), dtype=np.float16)
-        for i in range(n_features[d]):
-                test[c + '_tfidf_' + str(i)] = tfidf_test[:, i]
-        
-        d += 1
-        del tfidf, tfidf_test
-        gc.collect()
-        # print('project_title_tfidf Done.')
->>>>>>> kevin
 
     # Prepare data
     cols_to_drop = [
@@ -286,35 +199,11 @@ def processInput(donorsDictionary):
         'project_is_approved',
     ]
     X_test = test.drop(cols_to_drop, axis=1, errors='ignore')
-<<<<<<< HEAD
     id_test = test['id'].values
-=======
-    # id_test = test['id'].values
->>>>>>> kevin
 
     del test
     gc.collect()
 
-<<<<<<< HEAD
-    # Build the model
-    cnt = 0
-    p_buf = []
-    n_splits = 5
-    n_repeats = 1
-    kf = RepeatedKFold(
-        n_splits=n_splits, 
-        n_repeats=n_repeats, 
-        random_state=0)
-    auc_buf = []   
-
-    # load model to predict
-
-    print('Load model to predict')
-    imported_model = pickle.load( open( "model_v1.pkl", "rb" ) )
-    print('model loaded')
-    #predict
-    results = imported_model.predict(X_test)
-=======
     # load model to predict
 
     with open('model_v1.pkl', 'rb') as f:
@@ -322,5 +211,4 @@ def processInput(donorsDictionary):
 
     #predict
     results = model.predict(X_test)
->>>>>>> kevin
     return results[0]
