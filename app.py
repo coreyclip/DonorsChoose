@@ -10,6 +10,7 @@ import requests
 
 # our modules
 import processInput
+from import_lists import import_lists
 
 with open('model_v1.pkl', 'rb') as fin:
     model = pickle.load(fin)
@@ -21,7 +22,11 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/form', methods=['GET', 'POST'])
+@app.route("/index.html")
+def home2():
+    return render_template("index.html")
+
+@app.route('/form.html', methods=['GET', 'POST'])
 def form():
     # take in data from form
     if request.method == 'POST':
@@ -44,11 +49,11 @@ def form():
         print(input)
         pass # stuff happens
     else:
-        #stuff didn't happen
-        pass
-    return render_template('form.html')
+        dropdowns = import_lists()
+        print(dropdowns)
+        return render_template('form.html', dropdowns=dropdowns)
 
-@app.route('/aboutus')
+@app.route('/aboutus.html')
 def aboutus():
     return render_template('aboutus.html')
 
