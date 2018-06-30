@@ -2132,7 +2132,6 @@ nav a:hover {
 
 .banner-area {
   background-color: #f9f9ff;
-  height: 2000px;
 }
 
 .banner-area .fullscreen {
@@ -2735,7 +2734,6 @@ p {
   bottom: 0;
   background-color: #dd6b3d;
   z-index: 999999;
-<<<<<<< HEAD:static/css/style.css
   }
 
 /* FORM STYLE */
@@ -2855,6 +2853,3 @@ p {
             
             .currencyLabel { display:block; }        
         </style>
-=======
-  }
->>>>>>> 7d010133418ec570a3996919dd3f32267b63dc45:donorsChoose/css/main.css
