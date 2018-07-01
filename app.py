@@ -48,8 +48,8 @@ def form():
             'subject':subject,
             }
         print(user_input)
-        #processed_input = processInput.processInput(user_input)
-        #print(processed_input)
+        processed_input = processInput.processInput(user_input)
+        print(processed_input)
     else:
         #stuff didn't happen
         pass
