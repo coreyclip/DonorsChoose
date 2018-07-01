@@ -67,7 +67,7 @@ def form():
     else:
         dropdowns = import_lists()
         # print(dropdowns)
-        return render_template('form.html', dropdowns=dropdowns)
+        return render_template('form.html', dropdowns=dropdowns,error=error)
 
 @app.route('/aboutus.html')
 def aboutus():
