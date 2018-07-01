@@ -10,7 +10,8 @@ import requests
 
 # our modules
 import processInput
-
+from import_lists import import_lists
+from nowtime import what_time_is_it_mr_wolf
 
 app = Flask(__name__)
 
@@ -19,51 +20,56 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route('/form/', methods=['GET', 'POST'])
+@app.route("/index.html")
+def home2():
+    return render_template("index.html")
+
+@app.route('/form.html', methods=['GET', 'POST'])
 def form():
     error = ''
     # take in data from form
     
     if request.method == 'POST':
-        #name = request.form.get('name')
+        name = request.form.get('name')
         #email = request.form.get('email')
-        school = request.form.get('school')
-        city = request.form.get('city')
+        prefix = request.form.get('prefix')
         state = request.form.get('state')
-        essay = request.form.get('essay')
-        price = request.form.get('price')
-        subject = request.form.get('subject')
-        topic = request.form.get('topic')
-        about_school = request.form.get('about_school')
+        datetime = what_time_is_it_mr_wolf()
+        grade = request.form.get('grade')
+        category = request.form.get('category')
+        subcategory = request.form.get('subcategory')
+        number_of_projects = request.form.get('projects')
+        essay_1 = request.form.get('essay1')
+        essay_2 = request.form.get('essay2')
+        essay_3 = ''
+        essay_4 = ''
+        # resources = None
+
         user_input = {
-            #'name':name,
-            #'email':email, 
-            'school':school,
-            'about_school':about_school,
-            'city':city,
-            'state':state,
-            'price':price,
-            'topic':topic,
-            'essay':essay,
-            'subject':subject,
+            'prefix': prefix,
+            'state': state,
+            'datetime': datetime,
+            'grade': grade,
+            'category': category,
+            'subcategory': subcategory,
+            'number_of_projects': number_of_projects,
+            'essay_1': essay_1,
+            'essay_2': essay_2,
+            'essay_3': essay_3,
+            'essay_4': essay_4
             }
+        print(name)
         print(user_input)
-        processed_input = processInput.processInput(user_input)
-        print(processed_input)
+        #processed_input = processInput.processInput(user_input)
+        #print(processed_input)
+        # return render_template('results.html', username = name)
+        return ""
     else:
-        #stuff didn't happen
-        pass
-    return render_template('form.html', error=error)
-    #except Exception as e:
-        # print(user_input)
-        # print(str(e))
-        # error = 'Invalid Entry. Try Again.'
-        # try:
-        #     float(price)
-        # except:
-        #     error = error + " Invalid price entry"
-        #return render_template('form.html', error=error)
-@app.route('/aboutus')
+        dropdowns = import_lists()
+        # print(dropdowns)
+        return render_template('form.html', dropdowns=dropdowns)
+
+@app.route('/aboutus.html')
 def aboutus():
     return render_template('aboutus.html')
 

@@ -49,9 +49,10 @@
                         <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
-                                <form method=post enctype=multipart/form-data>
+                                <form method=POST enctype=multipart/form-data>
                                     <fieldset>
                                         <legend><span class="number">1</span> Candidate Info</legend>
+<<<<<<< HEAD
                                             <input type="text" name="name" placeholder="Your Name...",value="{{request.form.name}}" >
                                             <input type="email" name="email" placeholder="Your Email...",value="{{request.form.email}}">
                                             <input type="text" name="school" placeholder="Your School Name...",value="{{request.form.school}}">
@@ -89,6 +90,56 @@
                                         
                                         <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px" value="{{request.form.essay}}"></textarea>
                                     </fieldset>
+=======
+
+                                        <select id="prefix" name="prefix">
+                                            <optgroup label="prefixes">
+                                                {% for prefix in dropdowns.teacher_prefix %}
+                                                <option value="{{ prefix }}">{{ prefix }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                        
+                                        <input type="text" name="name" placeholder="Your Name...">                                        <input type="number" name="projects" id="projects" placeholder="Number of Previously Posted Projects" />
+                                        <label for="grade">Class Grade</label>
+                                        <select id="grade" name="grade">
+                                            <optgroup label="grades">
+                                                {% for grade in dropdowns.project_grade_category %}
+                                                <option value="{{ grade }}">{{ grade }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="category">Subject of Research/Classroom Project</label>
+                                        <select id="category" name="category">
+                                            <optgroup label="categories">
+                                                {% for category in dropdowns.project_subject_categories %}
+                                                <option value="{{ category }}">{{ category }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="subcategory">Subcategory of Research/Classroom Project</label>
+                                        <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                            <optgroup label="subcategories">
+                                                {% for subcat in dropdowns.project_subject_subcategories %}
+                                                <option value="{{ subcat }}">{{ subcat }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="state">State</label>
+                                        <select id="state" name="state">
+                                            <optgroup label="states">
+                                                {% for state in dropdowns.school_state %}
+                                                <option value="{{ state }}">{{ state }}</option>
+                                                {% endfor %}
+                                            </optgroup>                                                        
+                                        </select>     
+                                    </fieldset>
+                                <fieldset>
+                                    <legend><span class="number">2</span> Essay</legend>
+                                    <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                </fieldset>
+>>>>>>> kevin
                                 <input type="submit" value="See Your Results..." />
                                 </form>
                                 </div>
