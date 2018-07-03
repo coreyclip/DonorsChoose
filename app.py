@@ -3,15 +3,13 @@
 # Dependencies
 from flask import Flask, session, render_template, request, flash, jsonify, redirect, send_from_directory, url_for
 import pandas as pd
-import lightgbm as lgb
 import numpy as np
-import pickle
-import requests
 
 # our modules
 from process_input import process_input
 from import_lists import import_lists
 from now_time import the_time
+from predict import PREDICTABO
 
 app = Flask(__name__)
 
@@ -63,8 +61,9 @@ def form():
         print(user_input)
         processed_input = process_input(user_input)
         print(processed_input)
+        prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
-        return ""
+        return jsonify(prediction.tolist())
     else:
         dropdowns = import_lists()
         # print(dropdowns)
