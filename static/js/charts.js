@@ -36,7 +36,7 @@ d3.json(url, function (err, data) {
         .offset([80, -60])
         // The html() method allows us to mix JavaScript with HTML in the callback function
         .html(function (data) {
-            var state = data.geography;
+            var state = data.state;
             return state;
         });
 
