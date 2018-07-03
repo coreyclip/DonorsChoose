@@ -49,37 +49,59 @@
                         <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
-                                <form action="results.html">
+                                <form method=POST enctype=multipart/form-data>
                                     <fieldset>
                                         <legend><span class="number">1</span> Candidate Info</legend>
-                                            <input type="text" name="name" placeholder="Your Name...">
-                                            <input type="email" name="email" placeholder="Your Email...">
-                                            <input type="text" name="school" placeholder="Your School Name...">
-                                            <input type="text" name="city" placeholder="Your School's City...">
-                                            <input type="text" name="state" placeholder="Your School's State...">
-                                            <textarea name="field3" placeholder="About Yourself/School...."></textarea>
-                                            <input type="text" id="currencyField" placeholder="Grant Amount Being Requested..." />
-                                            <label for="subject">Subject of Research/Classroom Project</label>
-                                        <select id="subject" name="field6">
-                                            <optgroup label="subjects">
-                                                <option value="math">Math</option>
-                                                <option value="english">English</option>
-                                                <option value="science">Science</option>
-                                                <option value="reading">Reading</option>
-                                                <option value="art">Art</option>
-                                                <option value="foreignlanguage">Foreign Language</option>
-                                                <option value="other">Other</option>
+
+                                        <select id="prefix" name="prefix">
+                                            <optgroup label="prefixes">
+                                                {% for prefix in dropdowns.teacher_prefix %}
+                                                <option value="{{ prefix }}">{{ prefix }}</option>
+                                                {% endfor %}
                                             </optgroup>
+                                        </select>
+                                        
+                                        <input type="text" name="title" placeholder="Project Title">                                        
+                                        <input type="number" name="projects" id="projects" placeholder="Number of Previously Posted Projects" />
+                                        <label for="grade">Class Grade</label>
+                                        <select id="grade" name="grade">
+                                            <optgroup label="grades">
+                                                {% for grade in dropdowns.project_grade_category %}
+                                                <option value="{{ grade }}">{{ grade }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="category">Subject of Research/Classroom Project</label>
+                                        <select id="category" name="category">
+                                            <optgroup label="categories">
+                                                {% for category in dropdowns.project_subject_categories %}
+                                                <option value="{{ category }}">{{ category }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="subcategory">Subcategory of Research/Classroom Project</label>
+                                        <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                            <optgroup label="subcategories">
+                                                {% for subcat in dropdowns.project_subject_subcategories %}
+                                                <option value="{{ subcat }}">{{ subcat }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select><br /><br />
+                                        <label for="state">State</label>
+                                        <select id="state" name="state">
+                                            <optgroup label="states">
+                                                {% for state in dropdowns.school_state %}
+                                                <option value="{{ state }}">{{ state }}</option>
+                                                {% endfor %}
+                                            </optgroup>                                                        
                                         </select>     
                                     </fieldset>
                                 <fieldset>
                                     <legend><span class="number">2</span> Essay</legend>
-                                    <label for="subject">ESSAY #1: Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful.</label>
-                                    <textarea name="field3" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
-                                    <label for="subject">ESSAY #2: About your project: How will these materials make a difference in your students' learning and improve their school lives?</label>
-                                    <textarea name="field3" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                 </fieldset>
-                                <input type="submit" value="See Your Results..."/>
+                                <input type="submit" value="See Your Results..." />
                                 </form>
                                 </div>
                             </div>
