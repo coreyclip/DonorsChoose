@@ -3,6 +3,7 @@ from datetime import datetime
 def the_time():
     now = datetime.now()
     timedict = {
+        'now': now,
         'year': int(now.strftime('%Y')),
         'month': int(now.strftime('%m')),
         'date': int(now.strftime('%d')),

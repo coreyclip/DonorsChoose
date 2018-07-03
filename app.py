@@ -32,7 +32,7 @@ def form():
         #email = request.form.get('email')
         prefix = request.form.get('prefix')
         state = request.form.get('state')
-        datetime = the_time()
+        datetimes = the_time()
         grade = request.form.get('grade')
         category = request.form.get('category')
         subcategory = request.form.get('subcategory')
@@ -47,7 +47,7 @@ def form():
             'project_title': title,
             'teacher_prefix': prefix,
             'school_state': state,
-            'project_submitted_datetime': datetime,
+            'project_submitted_datetime': datetimes['now'],
             'project_grade_category': grade,
             'project_subject_categories': category,
             'project_subject_subcategories': subcategory,
@@ -58,11 +58,15 @@ def form():
             'project_essay_4': essay_4,
             'project_resource_summary': resources
             }
+        del datetimes['now']
+        for key, _ in datetimes.items():
+            user_input[key] = datetimes[key]
         print(user_input)
         processed_input = process_input(user_input)
-        print(processed_input)
+        # print(processed_input)
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
+        print(prediction)
         return jsonify(prediction.tolist())
     else:
         dropdowns = import_lists()
