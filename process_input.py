@@ -29,6 +29,8 @@ def process_input(data):
     data['project_resource_summary_len'] = 0
     data['project_resource_summary_wc'] = 0
 
+    data.to_csv('../static/data/user.csv')
+
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']
     for key in keys:

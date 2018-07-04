@@ -85,6 +85,11 @@ def predict(submission):
     prediction = {"results":'none'}
     return jsonify(prediction)
 
+@app.route('/data')
+def data():
+    df = pd.read_csv('data/census_data.csv')
+    return jsonify(df.to_dict(orient="records"))
+
 
 
 #this stuff just makes it easier for flask to grab static files
