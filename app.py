@@ -67,7 +67,8 @@ def form():
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
         print(prediction)
-        return jsonify(prediction.tolist())
+        pred = round(prediction.tolist()[0], 4) * 100
+        return render_template('results.html', pred=pred)
     else:
         dropdowns = import_lists()
         # print(dropdowns)
