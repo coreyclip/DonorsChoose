@@ -42,7 +42,7 @@ d3.csv('../static/data/census_data.csv', function(err, data){
         data.projects = +data.projects;
         data.totalHouseholds = +data.totalHouseholds;
         data.total_essay_wc = +data.total_essay_wc;
-        data.uninsured = +data.uninsured
+        data.total_price = +data.total_price
         //data.states = string(data.states);
     });
     
@@ -189,9 +189,9 @@ chartGroup.append("text")
 chartGroup.append("text")
   .attr("transform", `translate(${width/2}, ${height + margin.top + 55})`)
   .attr("class", "x-axis-text")
-  .attr("csv-column-name", "uninsured")   
+  .attr("csv-column-name", "total_price")   
   .classed("inactive", true)
-  .text("Uninsured Population");
+  .text("Avg. Project Cost");
 
 
 
