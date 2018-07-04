@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import os
 import pickle
+import json
+import datetime
 
 with open('model_v1.pkl', 'rb') as f:
     model = pickle.load(f)
@@ -29,7 +31,10 @@ def process_input(data):
     data['project_resource_summary_len'] = 0
     data['project_resource_summary_wc'] = 0
 
-    data.to_csv('../static/data/user.csv')
+    with open('static/data/user.json', 'w') as fp:
+        date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
+        data['project_submitted_datetime'] = date
+        json.dump(data,fp)
 
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']
