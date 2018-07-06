@@ -1,3 +1,7 @@
 
 *.csv
 *.ipynb
+static/.DS_Store
+static/css/.DS_Store
+static/data/user.json
+static/js/.DS_Store
