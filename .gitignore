@@ -1,7 +1,20 @@
 
+<<<<<<< HEAD
+.ipynb_checkpoints/cleaning-checkpoint.ipynb
+.ipynb_checkpoints/Untitled-checkpoint.ipynb
+.ipynb_checkpoints/xgb_lgb_nn-checkpoint.ipynb
+submission.csv
+Untitled1.ipynb
+.ipynb_checkpoints/cleaning-checkpoint.ipynb
+.ipynb_checkpoints/Untitled1-checkpoint.ipynb
+=======
 *.csv
 *.ipynb
+<<<<<<< HEAD
 static/.DS_Store
 static/css/.DS_Store
 static/data/user.json
 static/js/.DS_Store
+=======
+>>>>>>> gazelle
+>>>>>>> a2e021bc4bd60f787d1e694e2d76f700d2ca8d0f
