@@ -60,11 +60,8 @@ svg.append("g")
 
 let xAxisTranslate = svgHeight -20;
 
-/* svg.append("g")
-    .attr("transform", "translate(50, " + xAxisTranslate + ")")
-    .call(x_axis) */
-let colorList = ['#89cff0', '#ffa500']
-let legendText = ['Range of Standard Deviations', 'Current Standard Deviation']
+let colorList = ['#a921b8','#ef5f3c']
+let legendText = ['Range of Standard Deviations', 'Current Standard Deviation', 'Avg Std Mean']
 let barWidthList = [50, 20]
 let radiusList = [30, 10]
 let barChart = svg.selectAll('rect')
@@ -76,7 +73,7 @@ let barChart = svg.selectAll('rect')
     .attr('width', function(d, i) {
         let adjustedWidth = barWidthList[i] - barPadding
         return adjustedWidth})
-    .attr('fill-opacity', '0.8')
+    .attr('fill-opacity', '1')
     .attr('fill', function(d, i) { return colorList[i]})
     .attr('rx', function(d, i) { return radiusList[i]})
     .attr('ry', function(d, i) { return radiusList[i]})
