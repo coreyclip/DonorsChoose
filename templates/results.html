@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="../static/css/bootstrap.css">
         <link rel="stylesheet" href="../static/css/style.css">
-        <link rel="stylesheet" href="static/css/d3Style.css">
+        <link rel="stylesheet" href="../static/css/d3Style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
         <!--fonts-->
@@ -194,8 +194,8 @@ d3.csv('../../static/data/census_data.csv', function(err, data){
       .attr("cx", d => xScale(d.medianIncome))
       .attr("cy", d => yScale(d.approve))
       .attr("r", "10")
-      .attr("fill", "green")
-      .attr('opacity', "0.60")
+      .attr("fill", "#FFA500")
+      .attr('opacity', "0.70")
       
 
 
@@ -210,7 +210,7 @@ d3.csv('../../static/data/census_data.csv', function(err, data){
     //console.log(d)
     return (`<div class=panel panel-primary>
     <div class="panel-heading">${d.index}</div>
-       <div class="panel-body">pop in poverty ${d.approve}% </div>
+       <div class="panel-body">approved ${d.approve}% </div>
           </div>`)
   });
 
@@ -326,9 +326,9 @@ d3.selectAll(".x-axis-text").on('click', function(){
         
         //console.log('current x scale', xScale)
         xScale.domain([
-                      d3.min(data, d => d[ClickedXaxis])
-                      - d3.deviation(data, d => d[ClickedXaxis]) / 2,
-                      d3.max(data, d => d[ClickedXaxis])
+                      d3.min(data, d => d.ClickedXaxis)
+                      - d3.deviation(data, d => d.ClickedXaxis.) / 2,
+                      d3.max(data, d => d.ClickedXaxis)
                       ]);
           
         //console.log("New X scale", xScale)
@@ -388,9 +388,9 @@ d3.selectAll(".y-axis-text").on('click', function(){
         
         //console.log('current x scale', xScale)
         yScale.domain([
-                      d3.min(data, d => d[ClickedYaxis])
-                      - d3.deviation(data, d => d[ClickedYaxis]) / 2,
-                      d3.max(data, d => d[ClickedYaxis])
+                      d3.min(data, d => d.ClickedYaxis)
+                      - d3.deviation(data, d => d.ClickedYaxis) / 2,
+                      d3.max(data, d => d.ClickedYaxis)
                       ]);
           
         //console.log("New X scale", xScale)

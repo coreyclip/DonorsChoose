@@ -2,15 +2,10 @@ import numpy as np
 import pandas as pd
 import os
 import pickle
-<<<<<<< HEAD
 import json
 import datetime
-=======
 from process_resources import process_resources
->>>>>>> kevin
 
-with open('model_v1.pkl', 'rb') as f:
-    model = pickle.load(f)
 
 def process_input(data, res):
     # Load the dictionary that you want to test: 
@@ -35,18 +30,15 @@ def process_input(data, res):
     data['project_resource_summary_len'] = 0
     data['project_resource_summary_wc'] = 0
 
-<<<<<<< HEAD
     with open('static/data/user.json', 'w') as fp:
         date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
         data['project_submitted_datetime'] = date
         json.dump(data,fp)
-=======
     # resource features
     res2 = process_resources(res)
     for index, key in res2.items():
         data[index] = key
     del res, res2
->>>>>>> kevin
 
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']
@@ -68,7 +60,7 @@ def process_input(data, res):
         with open(filename, 'rb') as f:
             tfidf = pickle.load(f)
     
-        tfidf_test = np.array(tfidf.transform([data[key]]).toarray(), dtype=np.float16)
+        tfidf_test = np.array(tfidf.transform([data[key]]).toarray(), dtype=np.float)
         for i in range(n_features[d]):
                 data[key + '_tfidf_' + str(i)] = tfidf_test[:, i]
         
