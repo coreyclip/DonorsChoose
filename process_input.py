@@ -4,9 +4,6 @@ import os
 import pickle
 from process_resources import process_resources
 
-with open('model_v1.pkl', 'rb') as f:
-    model = pickle.load(f)
-
 def process_input(data, res):
     # Load the dictionary that you want to test: 
     data['project_essay'] = ' '.join([data['project_essay_1'], data['project_essay_2'], data['project_essay_3'], data['project_essay_4']])
