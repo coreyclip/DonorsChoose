@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <style>
+            svg {
+                margin-top: 50px;
+                margin-left:50px;
+                }</style>
+    </head>
+    <body>
+
+        <svg></svg>
+
+
+<script>
+console.log('debug1')
+
+let userInput = 3000;
+
+
+let svgWidth = 500, svgHeight = 400, barPadding = 5;
+let barWidth = 50;
+
+let dataset = [6129, userInput];
+
+let xScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, svgWidth]);
+
+let yScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, svgHeight]);
+
+
+let x_axis = d3.axisBottom()
+    .scale(xScale);
+
+let y_axis = d3.axisLeft()
+    .scale(yScale)
+
+
+
+let svg = d3.select('svg')
+    .attr('transform', "translate(50, 10)")
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
+svg.append("g")
+    .attr('transform', "translate(2, 10)")
+    .call(y_axis);
+
+let xAxisTranslate = svgHeight -20;
+
+/* svg.append("g")
+    .attr("transform", "translate(50, " + xAxisTranslate + ")")
+    .call(x_axis) */
+
+let barChart = svg.selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append('rect')
+    .attr('y', function(d) { return svgHeight - yScale(d) })
+    .attr('height', function(d) { return d })
+    .attr('width', barWidth - barPadding)
+    .attr('transform', function(d, i) { 
+        let translate = [barWidth * i, 0];
+        return "translate(" + translate + ")";
+    });
+
+let labels = svg.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) { return d;})
+    .attr('y', function(d) { return svgHeight - d - 2})
+    .attr('x', function(d, i){ return barWidth * i })
+
+console.log('debug2')
+</script>
+
+</body>
+</html>
