@@ -51,7 +51,7 @@
                                 <div class="form-style-5">
                                 <form method=POST enctype=multipart/form-data>
                                     <fieldset>
-                                        <legend><span class="number">1</span> Candidate Info</legend>
+                                        <legend><span class="number">1</span> CANDIDATE INFO:</legend>
 
                                         <select id="prefix" name="prefix">
                                             <optgroup label="prefixes">
@@ -61,9 +61,8 @@
                                             </optgroup>
                                         </select>
                                         
-                                        <input type="text" value = "Project Title" name="title" placeholder="Project Title">
-                                        <label for="projects">Number of Previously Posted Projects</label>                                    
-                                        <input type="number" value = "0" name="projects" id="projects" />
+                                        <input type="text" name="title" placeholder="Project Title">                                        
+                                        <input type="number" name="projects" id="projects" placeholder="Number of Previously Posted Projects" />
                                         <label for="grade">Class Grade</label>
                                         <select id="grade" name="grade">
                                             <optgroup label="grades">
@@ -98,9 +97,20 @@
                                         </select>     
                                     </fieldset>
                                 <fieldset>
-                                    <legend><span class="number">2</span> Essay</legend>
-                                    <textarea name="essay1" value = " " placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
-                                    <textarea name="essay2" value = " "placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <legend><span class="number">2</span> ADD ITEMS:</legend>
+                                    <form>
+                                        <p>Please enter items you are requesting...</p>
+                                        <input id="item" type="text" placeholder="Item" />
+                                        <input id="price" type="number" placeholder="Price" />
+                                        <input id="quantity" type="number" placeholder="Quantity" />
+                                        <input type="button" value="Save/Show" onclick="insert()" />
+                                      </form>
+                                      <div id="display"></div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><span class="number">3</span> ESSAY:</legend>
+                                    <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                 </fieldset>
                                 <input type="submit" value="See Your Results..." />
                                 </form>
@@ -120,21 +130,10 @@
         <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
-        
-        <!-- Loading Screen -->
-                <script>
-                    $(document).ready(function() {
-                    //Preloader
-                    $(window).on("load", function() {
-                    preloaderFadeOutTime = 1500;
-                    function hidePreloader() {
-                    var preloader = $('.spinner-wrapper');
-                    preloader.fadeOut(preloaderFadeOutTime);
-                    }
-                    hidePreloader();
-                    });
-                    });
-        </script>
+        <!-- <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+        <script class="jsbin" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+
+     
     </body>
  
     </html>

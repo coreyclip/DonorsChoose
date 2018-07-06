@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
   "use strict";
-  var counter = 0;
+  let counter = 0;
 
-	var window_width 	 = $(window).width(),
+	let window_width 	 = $(window).width(),
 	window_height 		 = window.innerHeight,
 	header_height 		 = $(".default-header").height(),
 	header_height_static = $(".site-header.static").outerHeight(),
@@ -48,7 +48,7 @@ $(document).ready(function(){
         location.hostname == this.hostname
       ) {
         // Figure out element to scroll to
-        var target = $(this.hash);
+        let target = $(this.hash);
         target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
         // Does a scroll target exist?
         if (target.length) {
@@ -59,7 +59,7 @@ $(document).ready(function(){
           }, 1000, function() {
             // Callback after animation
             // Must change focus!
-            var $target = $(target);
+            let $target = $(target);
             $target.focus();
             if ($target.is(":focus")) { // Checking if the target was focused
               return false;
@@ -76,12 +76,50 @@ $(document).ready(function(){
  
  });
 
+// -----------LOADING SCREEN - PRELOADER -------------//
+$(document).ready(function() {
+  //Preloader
+  $(window).on("load", function() {
+  preloaderFadeOutTime = 1500;
+  function hidePreloader() {
+  let preloader = $('.spinner-wrapper');
+  preloader.fadeOut(preloaderFadeOutTime);
+  }
+  hidePreloader();
+  });
+  });
 
- // currency input
- $(document).ready(function()
- {
-     $('.currency').blur(function()
-     {
-         $('.currency').formatCurrency();
-     });
- });
+
+ // --------- ADD ITEMS LIST ON FORM.HTML -------------//
+
+let items  = [];
+let prices   = [];
+let quantity = [];
+
+let itemInput  = document.getElementById("item");
+let priceInput   = document.getElementById("price");
+let quantityInput = document.getElementById("quantity");
+
+let messageBox  = document.getElementById("display");
+
+function insert ( ) {
+ items.push( itemInput.value );
+ prices.push( priceInput.value );
+ quantity.push( quantityInput.value );
+  
+ clearAndShow();
+}
+
+function clearAndShow () {
+  // Clear our fields
+  itemInput.value = "";
+  priceInput.value = "";
+  quantityInput.value = "";
+  
+  // Show our output
+  messageBox.innerHTML = "";
+  
+  messageBox.innerHTML += "Items: " + items.join(", ") + "<br/>";
+  messageBox.innerHTML += "Prices: " + prices.join(", ") + "<br/>";
+  messageBox.innerHTML += "Quantity: " + quantity.join(", ");
+}
