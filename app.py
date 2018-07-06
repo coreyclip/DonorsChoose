@@ -49,6 +49,10 @@ def form():
             'quantity': request.form.get('quantity')
         }
 
+        try:
+            int(number_of_projects)
+        except:
+            number_of_projects = 0
         user_input = {
             'project_title': title,
             'teacher_prefix': prefix,
@@ -67,7 +71,8 @@ def form():
         del datetimes['now']
         for key, _ in datetimes.items():
             user_input[key] = datetimes[key]
-        print(user_input)
+        # print(user_input)
+        print(resources_dictionary)
         processed_input = process_input(user_input, resources_dictionary)
         # print(processed_input)
         prediction = PREDICTABO(processed_input)

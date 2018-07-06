@@ -100,26 +100,34 @@ let itemInput  = document.getElementById("item");
 let priceInput   = document.getElementById("price");
 let quantityInput = document.getElementById("quantity");
 
+let priceOutput = document.getElementById("priceform");
+let quantityOutput = document.getElementById("quantityform");
+
 let messageBox  = document.getElementById("display");
 
-function insert ( ) {
- items.push( itemInput.value );
- prices.push( priceInput.value );
- quantity.push( quantityInput.value );
-  
- clearAndShow();
+function insert () {
+  items.push(itemInput.value);
+  prices.push(priceInput.value);
+  quantity.push(quantityInput.value);
+
+clearAndShow();
 }
 
 function clearAndShow () {
+
+  // Get the outputs
   // Clear our fields
   itemInput.value = "";
   priceInput.value = "";
   quantityInput.value = "";
-  
+
   // Show our output
   messageBox.innerHTML = "";
-  
+
   messageBox.innerHTML += "Items: " + items.join(", ") + "<br/>";
   messageBox.innerHTML += "Prices: " + prices.join(", ") + "<br/>";
   messageBox.innerHTML += "Quantity: " + quantity.join(", ");
-}
+
+  priceOutput.value = prices.join(", ");
+  quantityOutput.value = quantity.join(", ");
+ }
