@@ -2,11 +2,12 @@ import numpy as np
 import pandas as pd
 import os
 import pickle
+from process_resources import process_resources
 
 with open('model_v1.pkl', 'rb') as f:
     model = pickle.load(f)
 
-def process_input(data):
+def process_input(data, res):
     # Load the dictionary that you want to test: 
     data['project_essay'] = ' '.join([data['project_essay_1'], data['project_essay_2'], data['project_essay_3'], data['project_essay_4']])
 
@@ -28,6 +29,12 @@ def process_input(data):
     # these will be implemented later
     data['project_resource_summary_len'] = 0
     data['project_resource_summary_wc'] = 0
+
+    # resource features
+    res2 = process_resources(res)
+    for index, key in res2.items():
+        data[index] = key
+    del res, res2
 
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']

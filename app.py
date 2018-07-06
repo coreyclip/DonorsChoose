@@ -42,6 +42,10 @@ def form():
         essay_3 = ''
         essay_4 = ''
         resources = ''
+        resources_dictionary = {
+            'price': request.form.get('price'),
+            'quantity': request.form.get('quantity')
+        }
 
         user_input = {
             'project_title': title,
@@ -62,7 +66,7 @@ def form():
         for key, _ in datetimes.items():
             user_input[key] = datetimes[key]
         print(user_input)
-        processed_input = process_input(user_input)
+        processed_input = process_input(user_input, resources_dictionary)
         # print(processed_input)
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
