@@ -13,7 +13,7 @@
 
 	<div id='graph'></div>
 	
-	<script>
+<script>
 
 // D3 Scatterplot 
 
@@ -43,7 +43,7 @@ let chartGroup = svg.append("g")
 
 // Now that the chartGroup parameters are set up we move to actually plotting the data
 
-d3.csv('../../static/data/census_data.csv', function(err, data){
+d3.csv('static/data/census_data.csv', function(err, data){
     if (err) throw err;
 
     //log csv data
