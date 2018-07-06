@@ -73,18 +73,15 @@ def form():
             user_input[key] = datetimes[key]
         # print(user_input)
         print(resources_dictionary)
-        processed_input = process_input(user_input, resources_dictionary)
+        processed_input, user_data = process_input(user_input, resources_dictionary)
         # print(processed_input)
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
         print(prediction)
         pred = round(prediction.tolist()[0], 4) * 100
 
-        # load up the save semi-processed input for our user report
-        with open('static/data/user.json', 'r') as file:
-            input_for_report = json.load(file)
 
-        essay_report, grade_report, subject_report = report.user_report(input_for_report)
+        essay_report, grade_report, subject_report = report.user_report(user_data)
 
         return render_template('results.html', pred=pred,
          subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)

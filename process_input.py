@@ -29,16 +29,16 @@ def process_input(data, res):
     data['project_resource_summary_len'] = 0
     data['project_resource_summary_wc'] = 0
 
-    with open('static/data/user.json', 'w') as fp:
-        date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
-        data['project_submitted_datetime'] = date
-        json.dump(data,fp)
+    
     # resource features
     res2 = process_resources(res)
     for index, key in res2.items():
         data[index] = key
     del res, res2
 
+    user_data = data
+    date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
+    user_data['project_submitted_datetime'] = date
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']
     for key in keys:
@@ -72,4 +72,4 @@ def process_input(data, res):
         if key in data:
             del data[key]
 
-    return data
+    return data, user_data
