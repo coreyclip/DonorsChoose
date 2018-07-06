@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../static/css/linearicons.css">
         <link rel="stylesheet" href="../static/css/font-awesome.min.css">
         <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/magnific-popup.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="../static/css/bootstrap.css">
         <link rel="stylesheet" href="../static/css/style.css">
@@ -23,9 +24,10 @@
     </head>
 
     <body>
+    <!--page loader-->
             <div class="spinner-wrapper">
-                    <div class="spinner"></div>
-                    </div>
+                <div class="spinner"></div>
+            </div>
 
     <!--start header-->
         <header class="default-header">
@@ -47,14 +49,14 @@
                 </div>
             </div>
         </header>
-        <!--end header-->
+    <!--end header-->
 
 <!--start counter-->
 <section class="facts-area pt-100 pb-100">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 single-fact">
-                <h2 class="counter", id='prediction'>{{pred}} %</h2>
+            <div class="col center single-fact">
+                <h1 class="counter", id='prediction'  style="display:inline; font-size: 200px">{{pred}}</h1><h1 style="display:inline; font-size: 150px">%</h1>
                 <p class="text-uppercase">Chances of Funding Approval</p>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -443,31 +445,33 @@ d3.selectAll(".y-axis-text").on('click', function(){
 
         <script src="../static/js/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-        <script src="../static/js/bootstrap.min.js"></script> <!--Bootstrap-->
+		<script src="../static/js/vendor/bootstrap.min.js"></script> <!--Bootstrap-->
         <script src="../static/js/jquery.nice-select.min.js"></script> <!--Dropdown for nav-bar-->
         <script src="../static/js/jquery.sticky.js"></script> <!--sticky nav-bar-->
         <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
-        <script src="../static/js/jquery.ajaxchimp.min.js"></script>
         <script src="../static/js/waypoints.min.js"></script>
-        <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page-->
+        <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page -->
         <script src="../static/js/jquery.magnific-popup.min.js"></script>
+  
 
         <!-- Loading Screen -->
-                <script>
-                    $(document).ready(function() {
-                    //Preloader
-                    $(window).on("load", function() {
-                    preloaderFadeOutTime = 1500;
-                    function hidePreloader() {
-                    var preloader = $('.spinner-wrapper');
-                    preloader.fadeOut(preloaderFadeOutTime);
-                    }
-                    hidePreloader();
-                    });
-                    });
+        <script>
+            $(document).ready(function() {
+            //Preloader
+            $(window).on("load", function() {
+            preloaderFadeOutTime = 800;
+            function hidePreloader() {
+            var preloader = $('.spinner-wrapper');
+            preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
+            });
+            });
         </script>
+
     </body>
  
+    
     </html>

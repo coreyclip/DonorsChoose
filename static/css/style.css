@@ -2735,6 +2735,7 @@ p {
   bottom: 0;
   background-color: #dd6b3d;
   z-index: 999999;
+
   }
 
 /* FORM STYLE */
@@ -2853,4 +2854,10 @@ p {
             .sample h3 { margin:-4px; margin-bottom:10px; padding:4px; background:#555; color:#eee; }
             
             .currencyLabel { display:block; }        
+
         </style>
+
+        </style>
+
+  }
+
