@@ -6,7 +6,6 @@ import json
 import datetime
 from process_resources import process_resources
 
-
 def process_input(data, res):
     # Load the dictionary that you want to test: 
     data['project_essay'] = ' '.join([data['project_essay_1'], data['project_essay_2'], data['project_essay_3'], data['project_essay_4']])
