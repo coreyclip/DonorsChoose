@@ -4,12 +4,14 @@
 from flask import Flask, session, render_template, request, flash, jsonify, redirect, send_from_directory, url_for
 import pandas as pd
 import numpy as np
+import json
 
 # our modules
 from process_input import process_input
 from import_lists import import_lists
 from now_time import the_time
 from predict import PREDICTABO
+import report
 
 app = Flask(__name__)
 
@@ -42,6 +44,10 @@ def form():
         essay_3 = ''
         essay_4 = ''
         resources = ''
+        resources_dictionary = {
+            'price': request.form.get('price'),
+            'quantity': request.form.get('quantity')
+        }
 
         user_input = {
             'project_title': title,
@@ -62,12 +68,21 @@ def form():
         for key, _ in datetimes.items():
             user_input[key] = datetimes[key]
         print(user_input)
-        processed_input = process_input(user_input)
+        processed_input = process_input(user_input, resources_dictionary)
         # print(processed_input)
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
         print(prediction)
-        return jsonify(prediction.tolist())
+        pred = round(prediction.tolist()[0], 4) * 100
+
+        # load up the save semi-processed input for our user report
+        with open('static/data/user.json', 'r') as file:
+            input_for_report = json.load(file)
+
+        essay_report, grade_report, subject_report = report.user_report(input_for_report)
+
+        return render_template('results.html', pred=pred,
+         subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
     else:
         dropdowns = import_lists()
         # print(dropdowns)
@@ -77,13 +92,11 @@ def form():
 def aboutus():
     return render_template('aboutus.html')
 
-@app.route("/results/<submission>", methods=['GET'])
-def predict(submission):
-    #cleaned = clean(submission)
-    
 
-    prediction = {"results":'none'}
-    return jsonify(prediction)
+@app.route('/data')
+def data():
+    df = pd.read_csv('data/census_data.csv')
+    return jsonify(df.to_dict(orient="records"))
 
 
 
