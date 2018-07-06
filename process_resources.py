@@ -4,6 +4,10 @@ import numpy as np
 # price: #.##, #.##
 # Quantities: #, #
 def process_resources(data):
+    '''
+    INPUT: resources data, which will be a dictionary with keys price and quantities, which are just a comma separated string
+    OUTPUT: A Dictionary just like when we trained the model so it can predict!
+    '''
     try:
         price = np.array(data['price'].split(','), dtype='float64')
         quantities = np.array(data['quantities'].split(','), dtype='int')
@@ -43,6 +47,8 @@ def process_resources(data):
             'std_quantities': std_quantities,
             'mean_prices': mean_prices
         }      
+
+    # If there's any input error, just set everything to 0.  Because.
     except:
         return {
             'count_price': 0, 
