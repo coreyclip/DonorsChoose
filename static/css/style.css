@@ -1970,9 +1970,9 @@ nav a:hover {
 }
 
 .p1-gradient-bg, .primary-btn, .primary-btn:after, .primary-btn2:after, .single-con .content .content-overlay, .footer-social a:hover, .single-footer-widget .bb-btn {
-  background-image: -moz-linear-gradient(0deg, #000000ff 0%, #52fdd9 100%);
-  background-image: -webkit-linear-gradient(0deg, #2380ff 0%, #52fdd9 100%);
-  background-image: -ms-linear-gradient(0deg, #2380ff 0%, #52fdd9 100%);
+  background-image: -moz-linear-gradient(0deg, #d6d8db 0%, #e47a23 100%);
+  background-image: -webkit-linear-gradient(0deg, #d6d8db 0%, #e47a23 100%);
+  background-image: -ms-linear-gradient(0deg, #d6d8db 0%, #e47a23 100%);
 }
 
 .p2-gradient-bg {
@@ -2331,9 +2331,10 @@ nav a:hover {
 
 .single-con .content {
   position: relative;
-  max-width: 400px;
+  max-width: 300px;
   margin: auto;
   overflow: hidden;
+  box-shadow: 0 0 13px 11px black;
 }
 
 .single-con .content .content-overlay {
@@ -2735,12 +2736,11 @@ p {
   bottom: 0;
   background-color: #dd6b3d;
   z-index: 999999;
-<<<<<<< HEAD:static/css/style.css
   }
 
 /* FORM STYLE */
         .form-style-5{
-            max-width: 500px;
+            max-width: 850px;
             padding: 10px 20px;
             background: #f4f7f8;
             margin: 10px auto;
@@ -2770,7 +2770,7 @@ p {
         .form-style-5 input[type="url"],
         .form-style-5 textarea,
         .form-style-5 select {
-            font-family: Georgia, "Times New Roman", Times, serif;
+            font-family: 'Julius Sans One', sans-serif;
             background: rgba(255,255,255,.1);
             border: none;
             border-radius: 6px;
@@ -2843,18 +2843,11 @@ p {
             background: #e47a23;
         }
         
-/* Currency input */
-        <style type="text/css">
-            body, div  { margin:0px auto; padding:0px; }
+/* add items form style */
+ul {
+  list-style-type: none;
+}
 
-            .main { margin:40px; }
-            
-            .sample { float:left; margin:10px; padding:4px; border:1px solid #888; width:350px; }
-            
-            .sample h3 { margin:-4px; margin-bottom:10px; padding:4px; background:#555; color:#eee; }
-            
-            .currencyLabel { display:block; }        
-        </style>
-=======
-  }
->>>>>>> 7d010133418ec570a3996919dd3f32267b63dc45:donorsChoose/css/main.css
+article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; font-family: 'Julius Sans One', sans-serif;}
+
