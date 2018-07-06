@@ -327,7 +327,7 @@ d3.selectAll(".x-axis-text").on('click', function(){
         //console.log('current x scale', xScale)
         xScale.domain([
                       d3.min(data, d => d.ClickedXaxis)
-                      - d3.deviation(data, d => d.ClickedXaxis.) / 2,
+                      - d3.deviation(data, d => d.ClickedXaxis) / 2,
                       d3.max(data, d => d.ClickedXaxis)
                       ]);
           
