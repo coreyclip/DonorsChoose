@@ -52,49 +52,81 @@
                                     <form method=POST enctype=multipart/form-data>
                                         <fieldset>
                                             <legend><span class="number">1</span> CANDIDATE INFO:</legend>
-
-                                            <select id="prefix" name="prefix">
-                                                <optgroup label="prefixes">
-                                                    {% for prefix in dropdowns.teacher_prefix %}
-                                                    <option value="{{ prefix }}">{{ prefix }}</option>
-                                                    {% endfor %}
-                                                </optgroup>
-                                            </select>
+                                            <div class="form-row">
+                                                <div class="col-md-2">
+                                                    <select id="prefix" name="prefix" class="form-control">
+                                                        <optgroup label="prefixes">
+                                                            {% for prefix in dropdowns.teacher_prefix %}
+                                                            <option value="{{ prefix }}">{{ prefix }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col">    
+                                                    <input type="text" name="name" placeholder="Name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-3">
+                                                    <input class="form-control" type="text" placeholder="Class Grade" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select id="grade" name="grade">
+                                                        <optgroup label="grades">
+                                                            {% for grade in dropdowns.project_grade_category %}
+                                                            <option value="{{ grade }}">{{ grade }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" type="text" placeholder="Project Subject" readonly>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select id="category" name="category">
+                                                        <optgroup label="categories">
+                                                            {% for category in dropdowns.project_subject_categories %}
+                                                            <option value="{{ category }}">{{ category }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-7">
+                                                    <input type="text" name="title" placeholder="Project Title">
+                                                </div>
+                                                <div class="col">
+                                                    <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-3">
+                                                    <input class="form-control" type="text" placeholder="Project Subcategory">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                                        <optgroup label="subcategories">
+                                                            {% for subcat in dropdowns.project_subject_subcategories %}
+                                                            <option value="{{ subcat }}">{{ subcat }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input class="form-control" type="text" placeholder="State">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select id="state" name="state">
+                                                        <optgroup label="states">
+                                                            {% for state in dropdowns.school_state %}
+                                                            <option value="{{ state }}">{{ state }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>                                                        
+                                                    </select>     
+                                                </div>
+                                            </div>
                                             
-                                            <input type="text" name="title" placeholder="Project Title">                                        
-                                            <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
-                                            <label for="grade">Class Grade</label>
-                                            <select id="grade" name="grade">
-                                                <optgroup label="grades">
-                                                    {% for grade in dropdowns.project_grade_category %}
-                                                    <option value="{{ grade }}">{{ grade }}</option>
-                                                    {% endfor %}
-                                                </optgroup>
-                                            </select><br /><br />
-                                            <label for="category">Subject of Research/Classroom Project</label>
-                                            <select id="category" name="category">
-                                                <optgroup label="categories">
-                                                    {% for category in dropdowns.project_subject_categories %}
-                                                    <option value="{{ category }}">{{ category }}</option>
-                                                    {% endfor %}
-                                                </optgroup>
-                                            </select><br /><br />
-                                            <label for="subcategory">Subcategory of Research/Classroom Project</label>
-                                            <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
-                                                <optgroup label="subcategories">
-                                                    {% for subcat in dropdowns.project_subject_subcategories %}
-                                                    <option value="{{ subcat }}">{{ subcat }}</option>
-                                                    {% endfor %}
-                                                </optgroup>
-                                            </select><br /><br />
-                                            <label for="state">State</label>
-                                            <select id="state" name="state">
-                                                <optgroup label="states">
-                                                    {% for state in dropdowns.school_state %}
-                                                    <option value="{{ state }}">{{ state }}</option>
-                                                    {% endfor %}
-                                                </optgroup>                                                        
-                                            </select>     
                                         </fieldset>
                                         <fieldset>
                                         <legend><span class="number">2</span> ADD ITEMS:</legend>
