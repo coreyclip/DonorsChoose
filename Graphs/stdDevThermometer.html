@@ -125,22 +125,8 @@ let importantPoints = barChartGroup.selectAll('importantPoints')
     .attr('stroke-width', 2)
     .attr('d', function(d) { return 'M55 ' + (svgHeight - yScale(d)) + ' H110' })
 
-// Start the labels 
-/* let importantPointlabels = barChartGroup.selectAll('.text')
-    .data(markerValues)
-    .enter()
-    .append("text")
-    .attr('y', function(d, i) { return svgHeight - yScale(d)+5})
-    .attr('x', 120)
-    .text(function(d, i) {return markerLabels[i]})
-    .attr('fill', '#000000') 
- */
 
-
-
-// Start the Legend
-
-
+// Start the legend
 let legend = barChartGroup.append("g")
     .attr("class", "legend")
     .attr("height", 100)
