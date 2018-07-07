@@ -57,7 +57,6 @@ def form():
             'quantity': request.form.get('quantity')
         }
 
-        # Check if there's a number of projects value, set it to zero if there isn't because it makes things sad
         try:
             int(number_of_projects)
         except:
@@ -95,15 +94,15 @@ def form():
 
         # Generate reports for our output
         essay_report, grade_report, subject_report = report.user_report(user_data)
-
         return render_template('results.html', pred=pred,
-         subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
+         subject_report=subject_report, essay_report=essay_report, grade_report=grade_report, std_price=user_data['std_price'])
     
     # Otherwise give our form         
     else:
         dropdowns = import_lists()
         # print(dropdowns)
         return render_template('form.html', dropdowns=dropdowns,error=error)
+
 
 @app.route('/data')
 def data():
@@ -119,6 +118,13 @@ def send_js(path):
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path)
+
+@app.route('/stddevthermometer.html')
+def thermometer():
+    return render_template('stddevthermometer.html')
+
+
+
 
 if __name__ == "__main__":
     app.secret_key = 'my unobvious secret key'

@@ -10,10 +10,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
 </head>
 <body>
-  <h1>Exploring Statistical Relationships on the State Level</h1>
-	<div id='graph' style="padding:10%"></div>
-	<p>Click on each axis label to regenerate the scatterplot. Each Dot represents a state. Sometimes it takes awhile for the chart to initially load</p>
-<script>
+
+	<div id='graph'></div>
+	
+	<script>
 
 // D3 Scatterplot 
 
@@ -43,7 +43,7 @@ let chartGroup = svg.append("g")
 
 // Now that the chartGroup parameters are set up we move to actually plotting the data
 
-d3.csv('static/data/census_data.csv', function(err, data){
+d3.csv('../../static/data/census_data.csv', function(err, data){
     if (err) throw err;
 
     //log csv data
@@ -67,56 +67,54 @@ d3.csv('static/data/census_data.csv', function(err, data){
 
     // set the domain of the axes
     xScale.domain([d3.min(data, d => d.approve)
-                      - d3.deviation(data, d => d.approve) / 2,
-                      d3.max(data, d => d.approve)]);
+                   - d3.deviation(data, d => d.approve) / 2,
+                   d3.max(data, d => d.approve)]);
     yScale.domain([d3.min(data, d => d.approve)
-                      - d3.deviation(data, d => d.approve) / 2,
-                      d3.max(data, d => d.approve)]);
-        
-                      
+                  - d3.deviation(data, d => d.approve) / 2,
+                   d3.max(data, d => d.approve)]);
+    
+  //  add state labels
+  chartGroup.selectAll("text")
+                   .data(data)
+                   .enter()
+                   .append('text')
+                   .attr("x", d => xScale(d.medianIncome))
+                   // adjust y down a bit for better visual
+                   .attr("y", d => yScale(d.approve) + 2)
+                   .attr("font-size", "12px")
+                   .attr("text-anchor", "middle")
+                   .attr("class","abbr")
+                   .text(d => d.index)
+                   
     //  define axis functions
     let xAxis = d3.axisBottom(xScale);
     let yAxis = d3.axisLeft(yScale);
-    //console.log("x axis: ", xAxis);
-    //console.log("y axis: ", yAxis);
+      //console.log("x axis: ", xAxis);
+      //console.log("y axis: ", yAxis);
     
     // Append Axes to the chartGroup
-    // ==============================
-    // Add bottomAxis
-    chartGroup.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(xAxis);
-    
-    // Add leftAxis to the left side of the display
-    chartGroup.append("g")
-    .call(yAxis);
-    // hide the numbers on the axis for now
-    chartGroup.selectAll("text").remove();
-    console.log("ChartGroup: ", chartGroup)
-    
-    //  add state labels
-    chartGroup.selectAll("text")
-                    .data(data)
-                    .enter()
-                    .append('text')
-                    .attr("x", d => xScale(d.medianIncome))
-                    // adjust y down a bit for better visual
-                    .attr("y", d => yScale(d.approve))
-                    .attr("font-size", "12px")
-                    .attr("text-anchor", "middle")
-                    .attr("class","abbr")
-                    .text(d => d.index)
+  // ==============================
+  // Add bottomAxis
+  chartGroup.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(xAxis);
+
+  // Add leftAxis to the left side of the display
+  chartGroup.append("g")
+            .call(yAxis);
+
+  console.log("ChartGroup: ", chartGroup)
   //  Create Circles
   // ==============================
-let circlesGroup = chartGroup.selectAll('circle')
+  let circlesGroup = chartGroup.selectAll('circle')
       .data(data)
       .enter()
       .append("circle")
       .attr("cx", d => xScale(d.medianIncome))
       .attr("cy", d => yScale(d.approve))
-      .attr("r", "12")
-      .attr("fill", "#FF8C00")
-      .attr('opacity', ".7")
+      .attr("r", "10")
+      .attr("fill", "green")
+      .attr('opacity', "0.60")
       
 
 
@@ -130,8 +128,8 @@ let circlesGroup = chartGroup.selectAll('circle')
     .html(function(d){
     //console.log(d)
     return (`<div class=panel panel-primary>
-    <div class="panel-heading tooltext">${d.index}</div>
-       <div class="panel-body tooltext">${Math.round(d.approve * 100)}% approved</div>
+    <div class="panel-heading">${d.index}</div>
+       <div class="panel-body">pop in poverty ${d.approve}% </div>
           </div>`)
   });
 
@@ -260,13 +258,13 @@ d3.selectAll(".x-axis-text").on('click', function(){
         // adjust x-axis
         svg.select(".x-axis")
             .transition()
-            .duration(1500)
+            .duration(2000)
             .ease(d3.easeLinear)
             .call(xAxis)
         
             d3.selectAll("circle")
             .transition()
-            .duration(1500)
+            .duration(2000)
             .ease(d3.easeLinear)
             .attr("cx", function (d) {
                 console.log('New circle x corr',  d[ClickedXaxis])
@@ -278,7 +276,7 @@ d3.selectAll(".x-axis-text").on('click', function(){
             // adjust abbreviations
             d3.selectAll(".abbr")
             .transition()
-            .duration(1500)
+            .duration(1000)
             .ease(d3.easeLinear)
             .attr("x", function (d) {
                 return xScale(d[ClickedXaxis]);

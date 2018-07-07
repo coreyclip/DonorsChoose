@@ -602,6 +602,7 @@ pre code {
   padding-left: 15px;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 @media (min-width: 576px) {
@@ -635,14 +636,13 @@ pre code {
   padding-right: 15px;
   padding-left: 15px;
   height: 100%;
+  display: inline-block;
 }
 
 .row {
-  display: -webkit-box;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
   height: 100%;
+  display: flex;
 }
 
 .no-gutters {
@@ -667,13 +667,20 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-  padding-top:150px
+  padding-top: 15px;
+  display:  inline-block;
 }
 
 .col {
   flex-basis: 0;
   flex-grow: 1;
-  max-width: 100%;
+  max-width: 50%;
+  display:  inline-block;
+  flex: 1; /* additionally, equal width */
+  padding: 1em;
+  /* border: solid; */
+  padding-bottom: 100%;
+  margin-bottom: -100%;
 }
 
 .col-auto {

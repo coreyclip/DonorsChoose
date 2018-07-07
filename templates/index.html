@@ -6,14 +6,21 @@
         <title>Donors Choose</title>
         <meta charset="UTF-8">
         
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--CSS-->
         <link rel="stylesheet" href="../static/css/linearicons.css">
         <link rel="stylesheet" href="../static/css/font-awesome.min.css">
         <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/magnific-popup.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="../static/css/bootstrap.css">
         <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/d3Style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!--FONTS-->
+        <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
     </head>
 
     <body>
@@ -31,9 +38,9 @@
                         </div>
                         <div class="main-menubar d-flex align-items-center">
                             <nav class="hide">
-                                <a href="/">Home</a>
-                                <a href="/aboutus.html">About Us</a>
-                                <a href="/form.html">Get Your Project Funded</a>
+                                <a href="">Home</a>
+                                <a href="aboutus.html">About Us</a>
+                                <a href="form.html">Get Your Project Funded</a>
                             </nav>
                             <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
                         </div>
@@ -49,25 +56,27 @@
                     <div class="row fullscreen align-items-center justify-content-center">
                         <div class="banner-content col-lg-6 col-md-12">
                             <h1 class="text-uppercase">
-                                Get your Project or Research <br>
+                                Get your Classroom Project<br>
                                 Funded!
                             </h1>
                             <p>
-                                Would you like to find out your odds at getting approved for a grant in research 
-                                or funded for a classroom project? Click below to submit your essay for your chances!
+                                Would you like to find out your odds at getting approved for a grant for a
+                                 classroom project? Click below to submit your essay for your chances!
                             </p>
-                            <a href="/form.html">
+                            <a href="form.html">
                             <button class="primary-btn2 mt-20 text-uppercase ">
                                 Find out if you can get funded...<span class="lnr lnr-arrow-right"></span>
                                 
                             </button></a>
                         </div>
-                        <div class="col-lg-6 d-flex align-self-end img-right">
-                            <img class="img-fluid" src="../static/images/class.jpg" alt="class" style="    box-shadow: 0 0 17px black;">
+                        <div class="col-md-6" style="display: flex;">
+                            <img class="img-fluid" src="../static/images/class.jpg" alt="class" style="box-shadow: 0 0 17px black;">
                         </div>
                     </div>
             </div>
         </section>
+
+
         <!-- End banner Area -->
         <script src="../static/js/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -78,21 +87,6 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
         
-
-        <!-- Loading Screen -->
-                <script>
-                    $(document).ready(function() {
-                    //Preloader
-                    $(window).on("load", function() {
-                    preloaderFadeOutTime = 1500;
-                    function hidePreloader() {
-                    var preloader = $('.spinner-wrapper');
-                    preloader.fadeOut(preloaderFadeOutTime);
-                    }
-                    hidePreloader();
-                    });
-                    });
-        </script>
     </body>
  
     </html>

@@ -6,7 +6,6 @@
         <title>Donors Choose - Fund a Project</title>
         <meta charset="UTF-8">
         
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--CSS-->
         <link rel="stylesheet" href="static/css/linearicons.css">
         <link rel="stylesheet" href="static/css/font-awesome.min.css">
@@ -15,11 +14,12 @@
         <link rel="stylesheet" href="static/css/bootstrap.css">
         <link rel="stylesheet" href="static/css/style.css">
 
-        <style>
-        .small {
-            padding-top: 10px;
-        }
-        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!--FONTS-->
+        <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
     </head>
 
     <body>
@@ -52,7 +52,6 @@
         <!-- start form Area -->
         <section class="banner-area relative" id="home">
                 <div class="container">
-                        <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
                                     <form method=POST enctype=multipart/form-data>
@@ -62,8 +61,8 @@
                                                     <legend><span class="number">1</span> CANDIDATE INFO:</legend>
                                                 </div>
                                             </div>
-                                            <div class="form-row small">
-                                                <div class="col-md-2 small">
+                                            <div class="form-row">
+                                                <div class="col-md-2">
                                                     <select id="prefix" name="prefix" class="form-control">
                                                         <optgroup label="prefixes">
                                                             {% for prefix in dropdowns.teacher_prefix %}
@@ -72,15 +71,15 @@
                                                         </optgroup>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-10 small">    
+                                                <div class="col-md-10">    
                                                     <input type="text" name="name" placeholder="Name" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-row small">
-                                                <div class="col-md-3 small">
+                                            <div class="form-row">
+                                                <div class="col-md-3">
                                                     <input class="form-control" type="text" placeholder="Class Grade" readonly>
                                                 </div>
-                                                <div class="col-md-3 small">
+                                                <div class="col-md-3">
                                                     <select id="grade" name="grade">
                                                         <optgroup label="grades">
                                                             {% for grade in dropdowns.project_grade_category %}
@@ -89,10 +88,10 @@
                                                         </optgroup>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3 small">
+                                                <div class="col-md-3">
                                                     <input class="form-control" type="text" placeholder="Project Subject" readonly>
                                                 </div>
-                                                <div class="col-md-3 small">
+                                                <div class="col-md-3">
                                                     <select id="category" name="category">
                                                         <optgroup label="categories">
                                                             {% for category in dropdowns.project_subject_categories %}
@@ -102,11 +101,11 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-row small">
-                                                <div class="col-md-3 small">
+                                            <div class="form-row">
+                                                <div class="col-md-3">
                                                     <input class="form-control" type="text" placeholder="State">
                                                 </div>
-                                                <div class="col-md-3 small">
+                                                <div class="col-md-3">
                                                     <select id="state" name="state">
                                                         <optgroup label="states">
                                                             {% for state in dropdowns.school_state %}
@@ -115,10 +114,10 @@
                                                         </optgroup>                                                        
                                                     </select>     
                                                 </div>
-                                                <div class="col-md-3 small clearfix">
+                                                <div class="col-md-3 clearfix">
                                                     <input class="form-control" type="text" placeholder="Project Subcategory">
                                                 </div>
-                                                <div class="col-md-3 small" >
+                                                <div class="col-md-3" >
                                                     <select id="subcategory" name="subcategory">
                                                         <optgroup label="subcategories">
                                                             {% for subcat in dropdowns.project_subject_subcategories %}
@@ -128,28 +127,41 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-row small">
-                                                <div class="col-md-7 small">
+                                            <div class="form-row">
+                                                <div class="col-md-7">
                                                     <input type="text" name="title" placeholder="Project Title">
                                                 </div>
-                                                <div class="col small">
+                                                <div class="col">
                                                     <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
                                                 </div>
                                             </div>
-                                            
-                                        </fieldset>
                                         <fieldset>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <legend><span class="number">2</span> ADD ITEMS:</legend>
+                                                    <p>Please enter items you are requesting...</p>
                                                 </div>
                                             </div>
-                                        
-                                            <p>Please enter items you are requesting...</p>
-                                            <input id="item" type="text" placeholder="Item" />
-                                            <input id="price" type="number" placeholder="Price" />
-                                            <input id="quantity" type="number" placeholder="Quantity" />
-                                            <input type="button" value="Save/Show" onclick="insert()" />
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <input id="item" type="text" placeholder="Item" />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <input id="price" type="number" placeholder="Price" />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <input id="quantity" type="number" placeholder="Quantity" />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12">
+                                                    <input type="button" value="Save/Show" onclick="insert()" />
+                                                </div>
+                                            </div>
                                             <input id="priceform" type="text" name="price" value="" style="visibility: hidden;">
                                             <input id="quantityform" type="text" name="quantity" value="" style="visibility: hidden;">
                                         
@@ -158,23 +170,23 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-row">
-                                        <div class="col small">
+                                        <div class="col">
                                             <legend><span class="number">3</span> ESSAY:</legend>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="col small">
+                                        <div class="col">
                                             <legend><span class="number">1</span>Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful.</legend>
                                         </div>
-                                        <div class="col small">
+                                        <div class="col">
                                             <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="col small">
+                                        <div class="col">
                                             <legend><span class="number">2</span>About your project: How will these materials make a difference in your students' learning and improve their school lives?</legend>
                                         </div>
-                                        <div class="col small">
+                                        <div class="col">
                                             <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                         </div>
                                     </div>
@@ -183,7 +195,6 @@
                                 </form>
                                 </div>
                             </div>
-                        </div>
                 </div>
             </section>
         <!-- End form Area -->
@@ -197,7 +208,6 @@
         <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
-        <!-- <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script class="jsbin" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 
      
