@@ -24,7 +24,6 @@ def home():
 def home2():
     return render_template("index.html")
 
-<<<<<<< HEAD
 @app.route("/chart.html")
 def chart():
     return render_template("chart.html")
@@ -34,8 +33,6 @@ def aboutus():
     return render_template('aboutus.html')
 
 # the form route!
-=======
->>>>>>> chris
 @app.route('/form.html', methods=['GET', 'POST'])
 def form():
     error = ''
@@ -43,10 +40,6 @@ def form():
     
     if request.method == 'POST':
         title = request.form.get('title')
-<<<<<<< HEAD
-=======
-        #email = request.form.get('email')
->>>>>>> chris
         prefix = request.form.get('prefix')
         state = request.form.get('state')
         datetimes = the_time()
@@ -64,19 +57,12 @@ def form():
             'quantity': request.form.get('quantity')
         }
 
-<<<<<<< HEAD
-        # Check if there's a number of projects value, set it to zero if there isn't because it makes things sad
-=======
->>>>>>> chris
         try:
             int(number_of_projects)
         except:
             number_of_projects = 0
-<<<<<<< HEAD
 
         # Now let's make a dictionary to mimic the dataframe from training the model
-=======
->>>>>>> chris
         user_input = {
             'project_title': title,
             'teacher_prefix': prefix,
@@ -116,10 +102,6 @@ def form():
         dropdowns = import_lists()
         # print(dropdowns)
         return render_template('form.html', dropdowns=dropdowns,error=error)
-
-@app.route('/aboutus.html')
-def aboutus():
-    return render_template('aboutus.html')
 
 
 @app.route('/data')
