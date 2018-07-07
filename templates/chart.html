@@ -13,11 +13,7 @@
 
 	<div id='graph'></div>
 	
-<<<<<<< HEAD
-	<script>
-=======
 <script>
->>>>>>> kevin
 
 // D3 Scatterplot 
 
@@ -47,11 +43,7 @@ let chartGroup = svg.append("g")
 
 // Now that the chartGroup parameters are set up we move to actually plotting the data
 
-<<<<<<< HEAD
-d3.csv('../../static/data/census_data.csv', function(err, data){
-=======
 d3.csv('static/data/census_data.csv', function(err, data){
->>>>>>> kevin
     if (err) throw err;
 
     //log csv data
@@ -75,27 +67,6 @@ d3.csv('static/data/census_data.csv', function(err, data){
 
     // set the domain of the axes
     xScale.domain([d3.min(data, d => d.approve)
-<<<<<<< HEAD
-                   - d3.deviation(data, d => d.approve) / 2,
-                   d3.max(data, d => d.approve)]);
-    yScale.domain([d3.min(data, d => d.approve)
-                  - d3.deviation(data, d => d.approve) / 2,
-                   d3.max(data, d => d.approve)]);
-    
-  //  add state labels
-  chartGroup.selectAll("text")
-                   .data(data)
-                   .enter()
-                   .append('text')
-                   .attr("x", d => xScale(d.medianIncome))
-                   // adjust y down a bit for better visual
-                   .attr("y", d => yScale(d.approve) + 2)
-                   .attr("font-size", "12px")
-                   .attr("text-anchor", "middle")
-                   .attr("class","abbr")
-                   .text(d => d.index)
-                   
-=======
                       - d3.deviation(data, d => d.approve) / 2,
                       d3.max(data, d => d.approve)]);
     yScale.domain([d3.min(data, d => d.approve)
@@ -115,7 +86,6 @@ d3.csv('static/data/census_data.csv', function(err, data){
                     .attr("class","abbr")
                     .text(d => d.index)
                     
->>>>>>> kevin
     //  define axis functions
     let xAxis = d3.axisBottom(xScale);
     let yAxis = d3.axisLeft(yScale);
@@ -136,25 +106,15 @@ d3.csv('static/data/census_data.csv', function(err, data){
   console.log("ChartGroup: ", chartGroup)
   //  Create Circles
   // ==============================
-<<<<<<< HEAD
-  let circlesGroup = chartGroup.selectAll('circle')
-=======
 let circlesGroup = chartGroup.selectAll('circle')
->>>>>>> kevin
       .data(data)
       .enter()
       .append("circle")
       .attr("cx", d => xScale(d.medianIncome))
       .attr("cy", d => yScale(d.approve))
-<<<<<<< HEAD
-      .attr("r", "10")
-      .attr("fill", "green")
-      .attr('opacity', "0.60")
-=======
       .attr("r", "12")
       .attr("fill", "#FF8C00")
       .attr('opacity', ".7")
->>>>>>> kevin
       
 
 
@@ -168,13 +128,8 @@ let circlesGroup = chartGroup.selectAll('circle')
     .html(function(d){
     //console.log(d)
     return (`<div class=panel panel-primary>
-<<<<<<< HEAD
-    <div class="panel-heading">${d.index}</div>
-       <div class="panel-body">pop in poverty ${d.approve}% </div>
-=======
     <div class="panel-heading tooltext">${d.index}</div>
        <div class="panel-body tooltext">${Math.round(d.approve * 100)}% approved</div>
->>>>>>> kevin
           </div>`)
   });
 
@@ -303,21 +258,13 @@ d3.selectAll(".x-axis-text").on('click', function(){
         // adjust x-axis
         svg.select(".x-axis")
             .transition()
-<<<<<<< HEAD
-            .duration(2000)
-=======
             .duration(1500)
->>>>>>> kevin
             .ease(d3.easeLinear)
             .call(xAxis)
         
             d3.selectAll("circle")
             .transition()
-<<<<<<< HEAD
-            .duration(2000)
-=======
             .duration(1500)
->>>>>>> kevin
             .ease(d3.easeLinear)
             .attr("cx", function (d) {
                 console.log('New circle x corr',  d[ClickedXaxis])
@@ -329,11 +276,7 @@ d3.selectAll(".x-axis-text").on('click', function(){
             // adjust abbreviations
             d3.selectAll(".abbr")
             .transition()
-<<<<<<< HEAD
-            .duration(1000)
-=======
             .duration(1500)
->>>>>>> kevin
             .ease(d3.easeLinear)
             .attr("x", function (d) {
                 return xScale(d[ClickedXaxis]);

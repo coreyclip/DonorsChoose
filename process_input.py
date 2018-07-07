@@ -35,13 +35,6 @@ def process_input(data, res):
     data['project_resource_summary_wc'] = 0
 
     
-<<<<<<< HEAD
-    user_data = data
-    date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
-    user_data['project_submitted_datetime'] = date
-    
-=======
->>>>>>> kevin
     # resource features
     res2 = process_resources(res)
     for index, key in res2.items():

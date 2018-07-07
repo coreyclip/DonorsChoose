@@ -89,26 +89,12 @@ def form():
         processed_input, user_data = process_input(user_input, resources_dictionary)
         # And run it through our Geese Howard function to cross counter and get a value
         prediction = PREDICTABO(processed_input)
-<<<<<<< HEAD
-        # return render_template('results.html')
-        # print(prediction)
-
-        # Math that prediction for the masses!
-        pred = round(prediction.tolist()[0] *.80,2) * 100
-=======
         
         # Now turn that into a nice %
         pred = round(round(prediction.tolist()[0], 4) *.80 * 100, 2)
->>>>>>> kevin
 
         # Generate reports for our output
         essay_report, grade_report, subject_report = report.user_report(user_data)
-<<<<<<< HEAD
-        
-        # Send it all off to the render tempmlate
-=======
-
->>>>>>> kevin
         return render_template('results.html', pred=pred,
          subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
     
