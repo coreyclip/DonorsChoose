@@ -57,7 +57,7 @@ def user_report(user_input):
         application. Giving descriptive and well thought out essays is the best way to make 
         your application stand out. Applicantions that are approved typically have about 5-7 words
         in their titles with some higher, your title has {user_input["project_title_wc"]} words, based on raw
-        correlations this gives your application a {round((user_input["project_title_wc"] * 0.21),2) * 100}% boost. 
+        correlations this gives your application a {round((user_input["project_title_wc"] * 0.21),2)}% boost. 
         Your essays have an average of {average_wc} words each. Successful essays typically have word counts from 110 to 150.
         
         """
