@@ -5,9 +5,12 @@
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <style>
             svg {
-                margin-top: 50px;
-                margin-left:50px;
-                }</style>
+                margin-top: 1px;
+                margin-left:1px;
+                outline: 3px solid green;
+                padding: 20px;
+                }
+            svg {  }</style>
     </head>
     <body>
 
@@ -17,14 +20,16 @@
 console.log('debug1')
 // Start the Create a Bar Graph SVG
 // Get user Standard Deviation Input
-let userInput = 3000;
+let userInput = 5000;
 
 // Set the size of the SVG area
-let svgWidth = 500, svgHeight = 500, barPadding = 5;
+let svgWidth = 400, svgHeight = 500, barPadding = 5;
 let barWidth = 50;
 
 // Define value of the bars
 let dataset = [6129, userInput];
+let markerValues = [60, 25]
+let markerLabels = ['Mean', 'Mode']
 
 // Scale the size of the bars to the dataset
 let xScale = d3.scaleLinear()
@@ -41,9 +46,10 @@ let yScale = d3.scaleLinear()
 
 // Select the SVG element and move the chart within the SVG Ara
 let svg = d3.select('svg')
-    .attr('transform', "translate(100, 10)")
+   // .attr('transform', "translate(500, 500)")
     .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    .attr('height', svgHeight)
+    .attr('stroke', 1);
 
 // Create the Y Axis
 
@@ -53,18 +59,35 @@ let yAxisScale = d3.scaleLinear()
 
 let y_axis = d3.axisLeft()
     .scale(yAxisScale)
-    
-svg.append("g")
-    .attr('transform', "translate(50, -2)")
+
+let barChartGroup = svg.append("g")
+    .attr('transform', "translate(10, 5)")
+
+let avisGroup = barChartGroup.append("g")
+    .attr('transform', "translate(40, 0)")
     .call(y_axis);
 
-let xAxisTranslate = svgHeight -20;
 
-let colorList = ['#a921b8','#ef5f3c']
-let legendText = ['Range of Standard Deviations', 'Current Standard Deviation', 'Avg Std Mean']
-let barWidthList = [50, 20]
+
+let xAxisTranslate = svgHeight;
+
+let colorList = ['#a921b8','#ef5f3c', 'green', 'blue']
+let legendText = ['Range of Standard Deviations', 'Current Standard Deviation', 'Standard Deviation Mean ', 'Standard Deviation Mode']
+let barWidthList = [50, 20, 60, 60]
 let radiusList = [30, 10]
-let barChart = svg.selectAll('rect')
+
+// Start the labels 
+let labels = barChartGroup.selectAll('.text')
+    .data(dataset)
+    .enter()
+    .append("text")
+    .attr('y', function(d, i) { return svgHeight - yScale(d)+5})
+    .attr('x', 120)
+    .text(function(d) {return d})
+    .attr('fill', '#000000')
+
+// Start the Bars
+let barChart = barChartGroup.selectAll('rect')
     .data(dataset)
     .enter()
     .append('rect')
@@ -81,28 +104,52 @@ let barChart = svg.selectAll('rect')
         let translate = [i * 15 + 60, 0];
         return "translate(" + translate + ")";
     });
+    
+// Start the Markers
 
-let labels = svg.selectAll('text')
+
+let marks = barChartGroup.selectAll('markers')
     .data(dataset)
     .enter()
+    .append('path')
+    .attr('stroke', function(d, i){return colorList[i]})
+    .attr('stroke-width', 2)
+    .attr('d', function(d) { return 'M55 ' + (svgHeight - yScale(d)) + ' H110' })
+
+let importantPointColors = ['green', 'blue']
+let importantPoints = barChartGroup.selectAll('importantPoints')
+    .data(markerValues)
+    .enter()
+    .append('path')
+    .attr('stroke', function(d, i) {return importantPointColors[i]})
+    .attr('stroke-width', 2)
+    .attr('d', function(d) { return 'M55 ' + (svgHeight - yScale(d)) + ' H110' })
+
+// Start the labels 
+/* let importantPointlabels = barChartGroup.selectAll('.text')
+    .data(markerValues)
+    .enter()
     .append("text")
-    .text(function(d) { return d;})
-    .attr('y', function(d) { return svgHeight - d - 2 })
-    .attr('x', function(d, i) { return barWidth * i})
- /*    .attri('transform', function (d, i){
-        let translate = [] */
+    .attr('y', function(d, i) { return svgHeight - yScale(d)+5})
+    .attr('x', 120)
+    .text(function(d, i) {return markerLabels[i]})
+    .attr('fill', '#000000') 
+ */
+
+
 
 // Start the Legend
 
-let legend = svg.append("g")
+
+let legend = barChartGroup.append("g")
     .attr("class", "legend")
     .attr("height", 100)
     .attr("width", 100)
-    .attr('transform', 'translate(-20,50)');
+    .attr('transform', 'translate(90,50)');
 
 
 legend.selectAll('rect')
-    .data(dataset)
+    .data(legendText)
     .enter()
     .append("rect")
     .attr("x", svgWidth - 313)
@@ -117,7 +164,7 @@ legend.selectAll('rect')
     });
 
 legend.selectAll('text')
-    .data(dataset)
+    .data(legendText)
     .enter()
     .append("text")
     .attr("x", svgWidth - 300)
@@ -128,6 +175,8 @@ legend.selectAll('text')
         let text = legendText[i];
         return text;
     });
+
+
     
 
 console.log('debug2')
