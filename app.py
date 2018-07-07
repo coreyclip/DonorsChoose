@@ -24,18 +24,22 @@ def home():
 def home2():
     return render_template("index.html")
 
-# @app.route("/chart.html")
-# def chart():
-#     return render_template("chart.html")
+@app.route("/chart.html")
+def chart():
+    return render_template("chart.html")
 
+@app.route('/aboutus.html')
+def aboutus():
+    return render_template('aboutus.html')
+
+# the form route!
 @app.route('/form.html', methods=['GET', 'POST'])
 def form():
     error = ''
-
-    # Take in data from form
+    # take in data from form
+    
     if request.method == 'POST':
         title = request.form.get('title')
-        #email = request.form.get('email')
         prefix = request.form.get('prefix')
         state = request.form.get('state')
         datetimes = the_time()
@@ -53,13 +57,13 @@ def form():
             'quantity': request.form.get('quantity')
         }
 
-        # See if number of projects exists, if it doesn't make it zero so we don't error
+        # Check if there's a number of projects value, set it to zero if there isn't because it makes things sad
         try:
             int(number_of_projects)
         except:
             number_of_projects = 0
-        
-        # A nice dictionary of our user inputs
+
+        # Now let's make a dictionary to mimic the dataframe from training the model
         user_input = {
             'project_title': title,
             'teacher_prefix': prefix,
@@ -75,49 +79,49 @@ def form():
             'project_essay_4': essay_4,
             'project_resource_summary': resources
             }
-
-        # Some cleanup
+        
+        # Put the relevant datetime items into our user input for processing
         del datetimes['now']
         for key, _ in datetimes.items():
             user_input[key] = datetimes[key]
-        
-        # Process our data
-        # print(user_input)
-        # print(resources_dictionary)
+            
+        # Now to make it machine learnable, and also one slightly less numerical for our results page
         processed_input, user_data = process_input(user_input, resources_dictionary)
-        # print(processed_input)
-
-        # Make a prediction
+        # And run it through our Geese Howard function to cross counter and get a value
         prediction = PREDICTABO(processed_input)
+<<<<<<< HEAD
         # return render_template('results.html')
         # print(prediction)
 
         # Math that prediction for the masses!
         pred = round(prediction.tolist()[0] *.80,2) * 100
+=======
+        
+        # Now turn that into a nice %
+        pred = round(round(prediction.tolist()[0], 4) *.80 * 100, 2)
+>>>>>>> kevin
 
-        # Reports generating for the final results page
+        # Generate reports for our output
         essay_report, grade_report, subject_report = report.user_report(user_data)
+<<<<<<< HEAD
         
         # Send it all off to the render tempmlate
+=======
+
+>>>>>>> kevin
         return render_template('results.html', pred=pred,
          subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
-    # Unless there is no post, in which case make the page!
+    
+    # Otherwise give our form         
     else:
         dropdowns = import_lists()
         # print(dropdowns)
         return render_template('form.html', dropdowns=dropdowns,error=error)
 
-@app.route('/aboutus.html')
-def aboutus():
-    return render_template('aboutus.html')
-
-
 @app.route('/data')
 def data():
     df = pd.read_csv('data/census_data.csv')
     return jsonify(df.to_dict(orient="records"))
-
-
 
 #this stuff just makes it easier for flask to grab static files
 
@@ -128,9 +132,6 @@ def send_js(path):
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path)
-
-
-
 
 if __name__ == "__main__":
     app.secret_key = 'my unobvious secret key'
