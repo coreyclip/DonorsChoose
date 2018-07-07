@@ -1,6 +1,9 @@
 import pickle
 
 def load_scores():
+    '''
+    load in the tfidf scores
+    '''
     files = [
         'project_title_tfidf_scores',
         'project_essay_tfidf_scores',

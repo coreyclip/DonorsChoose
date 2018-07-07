@@ -4,6 +4,11 @@ import numpy as np
 # price: #.##, #.##
 # Quantities: #, #
 def process_resources(data):
+    '''
+    INPUT a dictionary with two values we care about, price and quantities
+    OUTPUT a dictionary with a lot of maths applied to it
+    Processes the resources input into a bunch of numbers we care about
+    '''
     try:
         price = np.array(data['price'].split(','), dtype='float64')
         quantities = np.array(data['quantities'].split(','), dtype='int')

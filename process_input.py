@@ -7,6 +7,11 @@ import datetime
 from process_resources import process_resources
 
 def process_input(data, res):
+    '''
+    INPUT a dictionary data and a dictionary res, which mimic the composition of the csv files from the kaggle competition we trained the model on
+    OUTPUT a dictionary data and a dictionary user_data, data for the algorithm and user_data for our report generation script
+    Processes the inputs in the same method as the training data to prepare it for making a prediction.  Takes another dictionary before removing all strings to check for our reports
+    '''
     # Load the dictionary that you want to test: 
     data['project_essay'] = ' '.join([data['project_essay_1'], data['project_essay_2'], data['project_essay_3'], data['project_essay_4']])
 
@@ -36,9 +41,11 @@ def process_input(data, res):
         data[index] = key
     del res, res2
 
-    user_data = data
+    # user data is ready to be extracted for reports
+    user_data = {key: value for key, value in data.items()}
     date = data['project_submitted_datetime'].strftime('%m/%d/%Y')
     user_data['project_submitted_datetime'] = date
+
     # encode our categorical data as numbers
     keys = ['teacher_prefix', 'school_state', 'project_grade_category', 'project_subject_categories', 'project_subject_subcategories']
     for key in keys:

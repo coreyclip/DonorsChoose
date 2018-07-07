@@ -1,6 +1,9 @@
 from datetime import datetime
 
 def the_time():
+    '''
+    Gets the current time and some features from that
+    '''
     now = datetime.now()
     timedict = {
         'now': now,

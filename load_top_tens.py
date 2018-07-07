@@ -1,6 +1,9 @@
 import pickle
 
 def load_top_tens():
+    '''
+    Load in the top ten words from the tfidf matrices
+    '''
     files = ['project_title_tfidf_scores_top_ten.pk',
      'project_essay_tfidf_scores_top_ten.pk',
      'project_resource_summary_tfidf_scores_top_ten.pk']
