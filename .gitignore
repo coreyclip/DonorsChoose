@@ -26,3 +26,4 @@ static/data/user.json
 static/js/.DS_Store
 .DS_Store
 static/.DS_Store
+*.pyc
