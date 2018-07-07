@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+        <!--Site Name-->
+        <title>Donors Choose</title>
+        <meta charset="UTF-8">
+        
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="../static/css/linearicons.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/magnific-popup.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/d3Style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!--fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+
+    <body>
+    <!--page loader-->
+            <div class="spinner-wrapper">
+                <div class="spinner"></div>
+            </div>
+
+    <!--start header-->
+        <header class="default-header">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="header-top d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="../static/images/logo.png" alt="logo" style="width:300px;"></a>
+                        </div>
+                        <div class="main-menubar d-flex align-items-center">
+                            <nav class="hide">
+                                    <a href="index.html">Home</a>
+                                    <a href="aboutus.html">About Us</a>
+                                    <a href="form.html">Get Your Project Funded</a>
+                            </nav>
+                            <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    <!--end header-->
+
+<!--start counter-->
+<section class="facts-area pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col center single-fact">
+                <h1 class="counter", id='prediction'  style="display:inline; font-size: 200px">{{pred}}</h1><h1 style="display:inline; font-size: 150px">%</h1>
+                <p class="text-uppercase">Chances of Funding Approval</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h3>About Your Results</h3>
+                <p>
+                    Overall about 84% of all applications on DonorsChoose.org eventually get funded.  
+                    Most projects on DonorsChoose.org are between <$1K and $4K
+                    <hr>
+                    {{subject_report}} 
+                    <hr>
+                    {{essay_report}}
+                    <hr>
+                    {{grade_report}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class='containter'>
+        <div class='row'>
+            <div class="col-lg-3 col-md-6 single-fact">
+                <h3 class='bold'>Most Frequent phrases across all applications</h3>
+                <img src='../static/images/resource_wordcloud.jpg' alt='resources word cloud', height=40%, width='80%'>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row">
+        <div class="col-xs-12  col-md-9 col-md-offset-0">
+            <div class="iframeContainer">
+                <iframe width="1100" height="600">
+                        <div id='graph'></div>
+                </iframe>
+                <!-- Students: Add a responsive iframe here that includes the d3.html file -->
+            </div>
+        </div>
+    </div>
+	
+<script>
+
+// D3 Scatterplot 
+
+let svgWidth = 960;
+let svgHeight = 600;
+
+let margin = {
+  top: 40,
+  right: 40,
+  bottom: 100,
+  left: 100
+};
+
+let width = svgWidth - margin.left - margin.right;
+let height = svgHeight - margin.top - margin.bottom;
+
+// Create an SVG wrapper, append an SVG group that will hold our chartGroup, and shift the latter by left and top margins.
+let svg = d3.select("#graph")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight)
+  .attr('padding-bottom', 1)
+
+let chartGroup = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
+// Now that the chartGroup parameters are set up we move to actually plotting the data
+
+d3.csv('../../static/data/census_data.csv', function(err, data){
+    if (err) throw err;
+
+    //log csv data
+    console.log("raw data: ", data)
+
+    //Parse Data as numbers
+    data.forEach(function(data){
+        data.approve = +data.approve;
+        data.medianIncome = +data.medianIncome;
+        data.projects = +data.projects;
+        data.totalHouseholds = +data.totalHouseholds;
+        data.total_essay_wc = +data.total_essay_wc;
+        data.total_price = +data.total_price
+        //data.states = string(data.states);
+    });
+    
+  
+    // Create Scale Functions
+    let xScale = d3.scaleLinear().range([0,width]);
+    let yScale = d3.scaleLinear().range([height, 0]);
+
+    // set the domain of the axes
+    xScale.domain([d3.min(data, d => d.approve)
+                   - d3.deviation(data, d => d.approve) / 2,
+                   d3.max(data, d => d.approve)]);
+    yScale.domain([d3.min(data, d => d.approve)
+                  - d3.deviation(data, d => d.approve) / 2,
+                   d3.max(data, d => d.approve)]);
+    
+  //  add state labels
+  chartGroup.selectAll("text")
+                   .data(data)
+                   .enter()
+                   .append('text')
+                   .attr("x", d => xScale(d.medianIncome))
+                   // adjust y down a bit for better visual
+                   .attr("y", d => yScale(d.approve) + 2)
+                   .attr("font-size", "12px")
+                   .attr("text-anchor", "middle")
+                   .attr("class","abbr")
+                   .text(d => d.index)
+                   
+    //  define axis functions
+    let xAxis = d3.axisBottom(xScale);
+    let yAxis = d3.axisLeft(yScale);
+      //console.log("x axis: ", xAxis);
+      //console.log("y axis: ", yAxis);
+    
+    // Append Axes to the chartGroup
+  // ==============================
+  // Add bottomAxis
+  chartGroup.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(xAxis);
+
+  // Add leftAxis to the left side of the display
+  chartGroup.append("g")
+            .call(yAxis);
+
+  console.log("ChartGroup: ", chartGroup)
+  //  Create Circles
+  // ==============================
+  let circlesGroup = chartGroup.selectAll('circle')
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", d => xScale(d.medianIncome))
+      .attr("cy", d => yScale(d.approve))
+      .attr("r", "10")
+      .attr("fill", "#FFA500")
+      .attr('opacity', "0.70")
+      
+
+
+    
+
+  // Initialize tool tip
+  // ==============================
+  let toolTip = d3.tip()
+    //.attr("class", "tooltip")
+    .offset([80, -60])
+    .html(function(d){
+    //console.log(d)
+    return (`<div class=panel panel-primary>
+    <div class="panel-heading">${d.index}</div>
+       <div class="panel-body">approved ${d.approve}% </div>
+          </div>`)
+  });
+
+// Create tooltip in the chartGroup
+// ==============================
+  console.log("chartGroup line 112:", chartGroup);
+ chartGroup.call(toolTip);
+
+
+  //  Create event listeners to display and hide the tooltip
+  // ==============================
+  circlesGroup.on("mouseover", function(d){
+    toolTip.show(d)
+  })
+  .on("mouseout", function(d){
+    toolTip.hide(d)
+  });
+
+  
+
+// Create axes labels
+
+// y labels
+chartGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left + 40)
+  .attr("x", 0 - (height / 1.5))
+  .attr("dy", "1em")
+  .attr("class", "y-axis-text")
+  .classed("active", true)
+  .attr("csv-column-name", "approve")  
+  .text("% approved");
+
+chartGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left + 20)
+  .attr("x", 0 - (height / 1.5))
+  .attr("dy", "1em")
+  .attr("class", "y-axis-text")
+  .classed("inactive", true)
+  .attr("csv-column-name", "total_essay_wc")  
+  .text("Avg. Essay Word Count");
+
+chartGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left + 0)
+  .attr("x", 0 - (height / 1.5))
+  .attr("dy", "1em")
+  .attr("class", "y-axis-text")
+  .classed("inactive", true)
+  .attr("csv-column-name", "projects")  
+  .text("Avg. Number of Previous Projects");
+
+
+
+  // x labels
+chartGroup.append("text")
+  .attr("transform", `translate(${width/2}, ${height + margin.top + 15})`)
+  .attr("class", "x-axis-text")
+  .attr("csv-column-name", "medianIncome")
+  .classed("active", true)  
+  .text("Median Income");
+
+chartGroup.append("text")
+  .attr("transform", `translate(${width/2}, ${height + margin.top + 35})`)
+  .attr("class", "x-axis-text")
+  .attr("csv-column-name", "totalHouseholds")
+  .classed("inactive", true)
+  .text("Total Households");
+
+chartGroup.append("text")
+  .attr("transform", `translate(${width/2}, ${height + margin.top + 55})`)
+  .attr("class", "x-axis-text")
+  .attr("csv-column-name", "total_price")   
+  .classed("inactive", true)
+  .text("Avg. Project Cost");
+
+
+
+  // change the x axis's status from inactive to active when clicked and change all active to inactive
+  function labelChangeX(clickedAxis) {
+    d3.selectAll(".x-axis-text")
+        .filter(".active")
+        .classed("active", false)
+        .classed("inactive", true);
+
+    clickedAxis.classed("inactive", false).classed("active", true);
+}
+
+// change the y axis's status from inactive to active when clicked and change all active to inactive
+function labelChangeY(clickedAxis) {
+  d3.selectAll(".y-axis-text")
+      .filter(".active")
+      .classed("active", false)
+      .classed("inactive", true);
+
+  clickedAxis.classed("inactive", false).classed("active", true);
+}
+// on click x-axis
+d3.selectAll(".x-axis-text").on('click', function(){
+
+    let clickedSelection = d3.select(this);
+    ClickedXaxis = clickedSelection.attr('csv-column-name')
+    console.log("this has been clicked: ", clickedSelection)
+
+    // get current y axis
+    let CurrentYaxis = d3.selectAll(".y-axis-text").filter(".active").attr('csv-column-name')
+    console.log("current y axis status",CurrentYaxis)
+
+
+    if (clickedSelection.classed('inactive')){
+        //console.log(data)
+        
+        //console.log('current x scale', xScale)
+        xScale.domain([
+                      d3.min(data, d => d.ClickedXaxis)
+                      - d3.deviation(data, d => d.ClickedXaxis) / 2,
+                      d3.max(data, d => d.ClickedXaxis)
+                      ]);
+          
+        //console.log("New X scale", xScale)
+        
+        //  define axis functions
+        let xAxis = d3.axisBottom(xScale);
+          
+        // adjust x-axis
+        svg.select(".x-axis")
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .call(xAxis)
+        
+            d3.selectAll("circle")
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr("cx", function (d) {
+                console.log('New circle x corr',  d[ClickedXaxis])
+                return xScale(d[ClickedXaxis]);
+                //return d[ClickedXaxis];
+            })
+            
+          
+            // adjust abbreviations
+            d3.selectAll(".abbr")
+            .transition()
+            .duration(1000)
+            .ease(d3.easeLinear)
+            .attr("x", function (d) {
+                return xScale(d[ClickedXaxis]);
+            })
+
+            labelChangeX(clickedSelection);
+    };
+
+
+});
+
+
+// on click y-axis
+d3.selectAll(".y-axis-text").on('click', function(){
+
+  
+  let clickedSelection = d3.select(this);
+    ClickedYaxis = clickedSelection.attr('csv-column-name')
+    console.log("this has been clicked: ", clickedSelection)
+
+    // get current x axis
+    let CurrentXaxis = d3.selectAll(".x-axis-text").filter(".active").attr('csv-column-name')
+    console.log("current x axis status",CurrentXaxis)
+
+
+    if (clickedSelection.classed('inactive')){
+        //console.log(data)
+        
+        //console.log('current x scale', xScale)
+        yScale.domain([
+                      d3.min(data, d => d.ClickedYaxis)
+                      - d3.deviation(data, d => d.ClickedYaxis) / 2,
+                      d3.max(data, d => d.ClickedYaxis)
+                      ]);
+          
+        //console.log("New X scale", xScale)
+        
+        //  define axis functions
+        let yAxis = d3.axisLeft(yScale);
+          
+        // adjust x-axis
+        svg.select(".y-axis")
+            .transition()
+            .duration(600)
+            .ease(d3.easeLinear)
+            .call(yAxis);
+        
+            d3.selectAll("circle")
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr("cy", function (d) {
+                console.log('New circle x corr',  d[ClickedYaxis])
+                return yScale(d[ClickedYaxis]);
+               
+            })
+            
+          
+            // adjust abbreviations
+            d3.selectAll(".abbr")
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr("y", function (d) {
+                return yScale(d[ClickedYaxis]);
+            })
+
+            labelChangeY(clickedSelection);
+    };
+})
+
+
+
+
+});
+
+
+
+
+	</script>
+
+</section>
+<!--end counter-->
+
+
+        <script src="../static/js/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+		<script src="../static/js/vendor/bootstrap.min.js"></script> <!--Bootstrap-->
+        <script src="../static/js/jquery.nice-select.min.js"></script> <!--Dropdown for nav-bar-->
+        <script src="../static/js/jquery.sticky.js"></script> <!--sticky nav-bar-->
+        <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../static/js/script.js"></script>
+        <script src="../static/js/waypoints.min.js"></script>
+        <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page -->
+        <script src="../static/js/jquery.magnific-popup.min.js"></script>
+  
+
+        <!-- Loading Screen -->
+        <script>
+            $(document).ready(function() {
+            //Preloader
+            $(window).on("load", function() {
+            preloaderFadeOutTime = 800;
+            function hidePreloader() {
+            var preloader = $('.spinner-wrapper');
+            preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
+            });
+            });
+        </script>
+  <iframe src="stdDevThermometer.html" width="480" height="570"></iframe>
+    </body>
+ 
+    
+    </html>
