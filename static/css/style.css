@@ -1986,9 +1986,9 @@ nav a:hover {
 }
 
 .p1-gradient-color, .banner-content h1, .single-fact h2, .single-footer-widget h3 {
-  background: -moz-linear-gradient(0deg, #232629 0%, #64793b 100%);
-  background: -webkit-linear-gradient(0deg, #262627 0%, #64793b 100%);
-  background: -ms-linear-gradient(0deg, #64793b 0%, #e2e4e6 100%);
+  background: -moz-linear-gradient(0deg, #e47a23 0%, #e47a23 100%);
+  background: -webkit-linear-gradient(0deg, #e47a23 0%, #e47a23 100%);
+  background: -ms-linear-gradient(0deg, #e47a23 0%, #e47a23 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
