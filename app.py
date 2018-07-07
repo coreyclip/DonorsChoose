@@ -90,7 +90,7 @@ def form():
         prediction = PREDICTABO(processed_input)
         
         # Now turn that into a nice %
-        pred = round(round(prediction.tolist()[0], 4) *.80 * 100, 2)
+        pred = round(round(prediction.tolist()[0], 4) *.90 * 100, 2)
 
         # Generate reports for our output
         essay_report, grade_report, subject_report = report.user_report(user_data)
