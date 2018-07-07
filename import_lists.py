@@ -2,7 +2,7 @@ import pickle
 
 def import_lists():
     '''
-    This function takes in no inputs, but outputs the dropdown menu lists for the front end to populate
+    Load the value lists for our dropdowns for the frontend
     '''
     with open('dropdownpop.pk', 'rb') as f:
         lists = pickle.load(f)

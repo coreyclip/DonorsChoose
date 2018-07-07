@@ -92,7 +92,6 @@ $(document).ready(function() {
 
  // --------- ADD ITEMS LIST ON FORM.HTML -------------//
 
-
 let items  = [];
 let prices   = [];
 let quantity = [];
