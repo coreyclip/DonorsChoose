@@ -27,3 +27,4 @@ static/js/.DS_Store
 .DS_Store
 static/.DS_Store
 *.pyc
+__pycache__/report.cpython-36.pyc
