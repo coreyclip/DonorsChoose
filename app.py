@@ -83,40 +83,25 @@ def form():
         
         # Process our data
         # print(user_input)
-<<<<<<< HEAD
-        print(resources_dictionary)
-=======
         # print(resources_dictionary)
->>>>>>> kevin
         processed_input, user_data = process_input(user_input, resources_dictionary)
         # print(processed_input)
 
         # Make a prediction
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
-<<<<<<< HEAD
-        print(prediction)
-        pred = round(prediction.tolist()[0], 4) * 100
-
-
-        essay_report, grade_report, subject_report = report.user_report(user_data)
-
-        return render_template('results.html', pred=pred,
-         subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
-=======
         # print(prediction)
 
         # Math that prediction for the masses!
-        pred = round(prediction.tolist()[0], 4) *.80 * 100
+        pred = round(prediction.tolist()[0] *.80,2) * 100
 
         # Reports generating for the final results page
         essay_report, grade_report, subject_report = report.user_report(user_data)
-
+        
         # Send it all off to the render tempmlate
         return render_template('results.html', pred=pred,
          subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
     # Unless there is no post, in which case make the page!
->>>>>>> kevin
     else:
         dropdowns = import_lists()
         # print(dropdowns)
