@@ -21,8 +21,10 @@
 console.log('debug1')
 // Start the Create a Bar Graph SVG
 // Get user Standard Deviation Input
-let userInput = 2500;
-//let userInput = {{ user_data['std_price'] }};
+// let userInput = 2500;
+let userInput = parent.jsUserData
+
+console.log({{user_data}})
 
 // Set the size of the SVG area
 let svgWidth = 400, svgHeight = 500, barPadding = 5;
