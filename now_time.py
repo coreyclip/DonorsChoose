@@ -1,6 +1,10 @@
 from datetime import datetime
 
 def the_time():
+    '''
+    Take no input, process the current time for that feature of the application
+    '''
+
     now = datetime.now()
     timedict = {
         'now': now,

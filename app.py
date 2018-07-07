@@ -24,11 +24,15 @@ def home():
 def home2():
     return render_template("index.html")
 
+# @app.route("/chart.html")
+# def chart():
+#     return render_template("chart.html")
+
 @app.route('/form.html', methods=['GET', 'POST'])
 def form():
     error = ''
-    # take in data from form
-    
+
+    # Take in data from form
     if request.method == 'POST':
         title = request.form.get('title')
         #email = request.form.get('email')
@@ -49,10 +53,13 @@ def form():
             'quantity': request.form.get('quantity')
         }
 
+        # See if number of projects exists, if it doesn't make it zero so we don't error
         try:
             int(number_of_projects)
         except:
             number_of_projects = 0
+        
+        # A nice dictionary of our user inputs
         user_input = {
             'project_title': title,
             'teacher_prefix': prefix,
@@ -68,15 +75,26 @@ def form():
             'project_essay_4': essay_4,
             'project_resource_summary': resources
             }
+
+        # Some cleanup
         del datetimes['now']
         for key, _ in datetimes.items():
             user_input[key] = datetimes[key]
+        
+        # Process our data
         # print(user_input)
+<<<<<<< HEAD
         print(resources_dictionary)
+=======
+        # print(resources_dictionary)
+>>>>>>> kevin
         processed_input, user_data = process_input(user_input, resources_dictionary)
         # print(processed_input)
+
+        # Make a prediction
         prediction = PREDICTABO(processed_input)
         # return render_template('results.html')
+<<<<<<< HEAD
         print(prediction)
         pred = round(prediction.tolist()[0], 4) * 100
 
@@ -85,6 +103,20 @@ def form():
 
         return render_template('results.html', pred=pred,
          subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
+=======
+        # print(prediction)
+
+        # Math that prediction for the masses!
+        pred = round(prediction.tolist()[0], 4) *.80 * 100
+
+        # Reports generating for the final results page
+        essay_report, grade_report, subject_report = report.user_report(user_data)
+
+        # Send it all off to the render tempmlate
+        return render_template('results.html', pred=pred,
+         subject_report=subject_report, essay_report=essay_report, grade_report=grade_report)
+    # Unless there is no post, in which case make the page!
+>>>>>>> kevin
     else:
         dropdowns = import_lists()
         # print(dropdowns)

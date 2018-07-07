@@ -1,6 +1,9 @@
 import pickle
 
 def load_scores():
+    '''
+    Another no input function, this one loads the tfidf score dictionaries
+    '''
     files = [
         'project_title_tfidf_scores',
         'project_essay_tfidf_scores',

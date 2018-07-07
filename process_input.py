@@ -7,6 +7,13 @@ import datetime
 from process_resources import process_resources
 
 def process_input(data, res):
+    '''
+    INPUT: data (dictionary), res (dictionary)
+    These inputs are formatted by app.py before processing
+    They should be formatted like the pandas dataframe in our initial model training script
+    Just, in a dictionary.
+    OUTPUT: A single dictionary ready to be fed into the model
+    '''
     # Load the dictionary that you want to test: 
     data['project_essay'] = ' '.join([data['project_essay_1'], data['project_essay_2'], data['project_essay_3'], data['project_essay_4']])
 
