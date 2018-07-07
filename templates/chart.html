@@ -10,9 +10,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
 </head>
 <body>
-
-	<div id='graph'></div>
-	
+  <h1>Exploring Statistical Relationships on the State Level</h1>
+	<div id='graph' style="padding:10%"></div>
+	<p>Click on each axis label to regenerate the scatterplot. Each Dot represents a state. Sometimes it takes awhile for the chart to initially load</p>
 <script>
 
 // D3 Scatterplot 
@@ -73,6 +73,27 @@ d3.csv('static/data/census_data.csv', function(err, data){
                       - d3.deviation(data, d => d.approve) / 2,
                       d3.max(data, d => d.approve)]);
         
+                      
+    //  define axis functions
+    let xAxis = d3.axisBottom(xScale);
+    let yAxis = d3.axisLeft(yScale);
+    //console.log("x axis: ", xAxis);
+    //console.log("y axis: ", yAxis);
+    
+    // Append Axes to the chartGroup
+    // ==============================
+    // Add bottomAxis
+    chartGroup.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(xAxis);
+    
+    // Add leftAxis to the left side of the display
+    chartGroup.append("g")
+    .call(yAxis);
+    // hide the numbers on the axis for now
+    chartGroup.selectAll("text").remove();
+    console.log("ChartGroup: ", chartGroup)
+    
     //  add state labels
     chartGroup.selectAll("text")
                     .data(data)
@@ -85,25 +106,6 @@ d3.csv('static/data/census_data.csv', function(err, data){
                     .attr("text-anchor", "middle")
                     .attr("class","abbr")
                     .text(d => d.index)
-                    
-    //  define axis functions
-    let xAxis = d3.axisBottom(xScale);
-    let yAxis = d3.axisLeft(yScale);
-      //console.log("x axis: ", xAxis);
-      //console.log("y axis: ", yAxis);
-    
-    // Append Axes to the chartGroup
-  // ==============================
-  // Add bottomAxis
-  chartGroup.append("g")
-            .attr("transform", `translate(0, ${height})`)
-            .call(xAxis);
-
-  // Add leftAxis to the left side of the display
-  chartGroup.append("g")
-            .call(yAxis);
-
-  console.log("ChartGroup: ", chartGroup)
   //  Create Circles
   // ==============================
 let circlesGroup = chartGroup.selectAll('circle')
