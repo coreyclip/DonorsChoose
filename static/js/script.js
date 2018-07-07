@@ -100,26 +100,57 @@ let itemInput  = document.getElementById("item");
 let priceInput   = document.getElementById("price");
 let quantityInput = document.getElementById("quantity");
 
+let priceOutput = document.getElementById("priceform");
+let quantityOutput = document.getElementById("quantityform");
+
 let messageBox  = document.getElementById("display");
 
-function insert ( ) {
- items.push( itemInput.value );
- prices.push( priceInput.value );
- quantity.push( quantityInput.value );
-  
- clearAndShow();
+function insert () {
+  items.push(itemInput.value);
+  prices.push(priceInput.value);
+  quantity.push(quantityInput.value);
+
+clearAndShow();
 }
 
 function clearAndShow () {
+
+  // Get the outputs
   // Clear our fields
   itemInput.value = "";
   priceInput.value = "";
   quantityInput.value = "";
-  
+
   // Show our output
   messageBox.innerHTML = "";
-  
+
   messageBox.innerHTML += "Items: " + items.join(", ") + "<br/>";
   messageBox.innerHTML += "Prices: " + prices.join(", ") + "<br/>";
   messageBox.innerHTML += "Quantity: " + quantity.join(", ");
+
+  priceOutput.value = prices.join(", ");
+  quantityOutput.value = quantity.join(", ");
+ }
+
+
+ //MODAL IMAGES
+ // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
 }

@@ -118,7 +118,7 @@ a, a:focus, a:hover {
 
 h1, h2, h3,
 h4, h5, h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
   color: #222222;
   line-height: 1.2em !important;
   margin-bottom: 0;
@@ -130,18 +130,20 @@ h4, h5, h6 {
 .h4, .h5, .h6 {
   margin-bottom: 0;
   margin-top: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Julius Sans One', sans-serif;
   font-weight: 600;
   color: #222222;
 }
 
 h1, .h1 {
   font-size: 36px;
+  font-family: 'Julius Sans One', sans-serif;
 
 }
 
 h2, .h2 {
   font-size: 30px;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 h3, .h3 {
@@ -611,6 +613,7 @@ td, th {
 }
 
 .flex-grow {
+  box-flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
@@ -1942,9 +1945,9 @@ nav a:hover {
   color: #2482ff;
 }
 
-.section-gap {
+/* .section-gap {
   padding: 120px 0;
-}
+} */
 
 .section-title {
   padding-bottom: 30px;
@@ -2132,7 +2135,7 @@ nav a:hover {
 
 .banner-area {
   background-color: #f9f9ff;
-  height: 2000px;
+  height: 100%;
 }
 
 .banner-area .fullscreen {
@@ -2438,77 +2441,7 @@ nav a:hover {
   margin-top: 15px;
 }
 
-.blog-area h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.blog-area p {
-  margin-bottom: 45px;
-  text-align: center;
-}
-
-.single-blog h4 {
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin-top: 35px;
-}
-
-.single-blog a {
-  color: #222;
-}
-
-.single-blog .name {
-  font-size: 13px;
-  font-weight: 100;
-}
-
-.single-blog p {
-  text-align: left;
-  margin-top: 15px;
-}
-
-.single-blog .bottom {
-  padding: 10px 0;
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
-}
-
-.single-blog .bottom span {
-  margin-left: 10px;
-}
-
-@media (max-width: 768px) {
-  .single-blog {
-    margin-bottom: 30px;
-  }
-  .single-blog .meta {
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 767px) {
-  .single-blog .meta {
-    margin-top: 0px;
-  }
-}
-
-.single-blog .f-img {
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-.single-blog .f-img:hover {
-  cursor: pointer;
-  opacity: .5;
-  transform: scale(1.05);
-}
-
+/* FOOTER */
 .footer-area {
   padding-top: 100px;
   background-color: #222222;
@@ -2535,6 +2468,7 @@ h6 {
 
 p {
   color: #777;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .copy-right-text i, .copy-right-text a {
@@ -2740,7 +2674,7 @@ p {
 
 /* FORM STYLE */
         .form-style-5{
-            max-width: 850px;
+            max-width: 900px;
             padding: 10px 20px;
             background: #f4f7f8;
             margin: 10px auto;
@@ -2851,3 +2785,84 @@ ul {
 article, aside, figure, footer, header, hgroup, 
   menu, nav, section { display: block; font-family: 'Julius Sans One', sans-serif;}
 
+
+  /* Modal Images */
+  /* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: initial;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+      width: 100%;
+  }
+}

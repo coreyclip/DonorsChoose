@@ -6,14 +6,21 @@
         <title>Donors Choose - Fund a Project</title>
         <meta charset="UTF-8">
         
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--CSS-->
         <link rel="stylesheet" href="../static/css/linearicons.css">
         <link rel="stylesheet" href="../static/css/font-awesome.min.css">
         <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/magnific-popup.css">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="../static/css/bootstrap.css">
         <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/d3Style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!--FONTS-->
+        <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
     </head>
 
     <body>
@@ -46,66 +53,68 @@
         <!-- start form Area -->
         <section class="banner-area relative" id="home">
                 <div class="container">
-                        <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
-                                <form method=POST enctype=multipart/form-data>
-                                    <fieldset>
-                                        <legend><span class="number">1</span> CANDIDATE INFO:</legend>
+                                    <form method=POST enctype=multipart/form-data>
+                                        <fieldset>
+                                            <legend><span class="number">1</span> CANDIDATE INFO:</legend>
 
-                                        <select id="prefix" name="prefix">
-                                            <optgroup label="prefixes">
-                                                {% for prefix in dropdowns.teacher_prefix %}
-                                                <option value="{{ prefix }}">{{ prefix }}</option>
-                                                {% endfor %}
-                                            </optgroup>
-                                        </select>
+                                            <select id="prefix" name="prefix">
+                                                <optgroup label="prefixes">
+                                                    {% for prefix in dropdowns.teacher_prefix %}
+                                                    <option value="{{ prefix }}">{{ prefix }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select>
+                                            
+                                            <input type="text" name="title" placeholder="Project Title">                                        
+                                            <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
+                                            <label for="grade">Class Grade</label>
+                                            <select id="grade" name="grade">
+                                                <optgroup label="grades">
+                                                    {% for grade in dropdowns.project_grade_category %}
+                                                    <option value="{{ grade }}">{{ grade }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="category">Subject of Research/Classroom Project</label>
+                                            <select id="category" name="category">
+                                                <optgroup label="categories">
+                                                    {% for category in dropdowns.project_subject_categories %}
+                                                    <option value="{{ category }}">{{ category }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="subcategory">Subcategory of Research/Classroom Project</label>
+                                            <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                                <optgroup label="subcategories">
+                                                    {% for subcat in dropdowns.project_subject_subcategories %}
+                                                    <option value="{{ subcat }}">{{ subcat }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="state">State</label>
+                                            <select id="state" name="state">
+                                                <optgroup label="states">
+                                                    {% for state in dropdowns.school_state %}
+                                                    <option value="{{ state }}">{{ state }}</option>
+                                                    {% endfor %}
+                                                </optgroup>                                                        
+                                            </select>     
+                                        </fieldset>
+                                        <fieldset>
+                                        <legend><span class="number">2</span> ADD ITEMS:</legend>
                                         
-                                        <input type="text" name="title" placeholder="Project Title">                                        
-                                        <input type="number" name="projects" id="projects" placeholder="Number of Previously Posted Projects" />
-                                        <label for="grade">Class Grade</label>
-                                        <select id="grade" name="grade">
-                                            <optgroup label="grades">
-                                                {% for grade in dropdowns.project_grade_category %}
-                                                <option value="{{ grade }}">{{ grade }}</option>
-                                                {% endfor %}
-                                            </optgroup>
-                                        </select><br /><br />
-                                        <label for="category">Subject of Research/Classroom Project</label>
-                                        <select id="category" name="category">
-                                            <optgroup label="categories">
-                                                {% for category in dropdowns.project_subject_categories %}
-                                                <option value="{{ category }}">{{ category }}</option>
-                                                {% endfor %}
-                                            </optgroup>
-                                        </select><br /><br />
-                                        <label for="subcategory">Subcategory of Research/Classroom Project</label>
-                                        <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
-                                            <optgroup label="subcategories">
-                                                {% for subcat in dropdowns.project_subject_subcategories %}
-                                                <option value="{{ subcat }}">{{ subcat }}</option>
-                                                {% endfor %}
-                                            </optgroup>
-                                        </select><br /><br />
-                                        <label for="state">State</label>
-                                        <select id="state" name="state">
-                                            <optgroup label="states">
-                                                {% for state in dropdowns.school_state %}
-                                                <option value="{{ state }}">{{ state }}</option>
-                                                {% endfor %}
-                                            </optgroup>                                                        
-                                        </select>     
-                                    </fieldset>
-                                <fieldset>
-                                    <legend><span class="number">2</span> ADD ITEMS:</legend>
-                                    <form>
-                                        <p>Please enter items you are requesting...</p>
-                                        <input id="item" type="text" placeholder="Item" />
-                                        <input id="price" type="number" placeholder="Price" />
-                                        <input id="quantity" type="number" placeholder="Quantity" />
-                                        <input type="button" value="Save/Show" onclick="insert()" />
-                                      </form>
-                                      <div id="display"></div>
+                                            <p>Please enter items you are requesting...</p>
+                                            <input id="item" type="text" placeholder="Item" />
+                                            <input id="price" type="number" placeholder="Price" />
+                                            <input id="quantity" type="number" placeholder="Quantity" />
+                                            <input type="button" value="Save/Show" onclick="insert()" />
+                                            <input id="priceform" type="text" name="price" value="" style="visibility: hidden;">
+                                            <input id="quantityform" type="text" name="quantity" value="" style="visibility: hidden;">
+                                        
+                                      <div id="display">
+                                      </div>
                                 </fieldset>
                                 <fieldset>
                                     <legend><span class="number">3</span> ESSAY:</legend>
@@ -116,7 +125,6 @@
                                 </form>
                                 </div>
                             </div>
-                        </div>
                 </div>
             </section>
         <!-- End form Area -->
@@ -130,7 +138,6 @@
         <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
-        <!-- <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script class="jsbin" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 
      
