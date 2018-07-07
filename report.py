@@ -16,14 +16,14 @@ def user_report(user_input):
             subject_report += f"""
                 your subject {subject} is in the top three most common categories applicants apply for, 
                 subjects that are not in the top three: Health & Sports, Math & Science, Literacy & Language have
-                a slightly higher chance of being approved, though by listing a sub category this penalty is mostly nullified
+                a slightly higher chance of being approved, though by listing a sub category this penalty is mostly nullified.
                 """
         else:
             subject_report += f"""
             your subject {subject} is not in one of the the the top three subject catregories:
             Health & Sports, Math & Science, or Literacy & Language,
-            subjects other than these have a slighly higher chance of being approved
-            providing a sub-category as well also increases your chances
+            subjects other than these have a slightly higher chance of being approved
+            providing a sub-category also increases your chances.
             """
     except:
         subject_report += f"""
