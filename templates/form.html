@@ -6,7 +6,6 @@
         <title>Donors Choose - Fund a Project</title>
         <meta charset="UTF-8">
         
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--CSS-->
         <link rel="stylesheet" href="static/css/linearicons.css">
         <link rel="stylesheet" href="static/css/font-awesome.min.css">
@@ -17,9 +16,23 @@
 
         <style>
         .small {
-            height: 75px;
+            padding-top: 10px;
         }
         </style>
+        <link rel="stylesheet" href="../static/css/linearicons.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/magnific-popup.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/d3Style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!--FONTS-->
+        <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
     </head>
 
     <body>
@@ -52,7 +65,6 @@
         <!-- start form Area -->
         <section class="banner-area relative" id="home">
                 <div class="container">
-                        <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
                                     <form method=POST enctype=multipart/form-data>
@@ -63,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-row small">
-                                                <div class="col-md-2">
+                                                <div class="col-md-2 small">
                                                     <select id="prefix" name="prefix" class="form-control">
                                                         <optgroup label="prefixes">
                                                             {% for prefix in dropdowns.teacher_prefix %}
@@ -72,15 +84,15 @@
                                                         </optgroup>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-10">    
+                                                <div class="col-md-10 small">    
                                                     <input type="text" name="name" placeholder="Name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-row small">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <input class="form-control" type="text" placeholder="Class Grade" readonly>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <select id="grade" name="grade">
                                                         <optgroup label="grades">
                                                             {% for grade in dropdowns.project_grade_category %}
@@ -89,10 +101,10 @@
                                                         </optgroup>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <input class="form-control" type="text" placeholder="Project Subject" readonly>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <select id="category" name="category">
                                                         <optgroup label="categories">
                                                             {% for category in dropdowns.project_subject_categories %}
@@ -103,10 +115,10 @@
                                                 </div>
                                             </div>
                                             <div class="form-row small">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <input class="form-control" type="text" placeholder="State">
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small">
                                                     <select id="state" name="state">
                                                         <optgroup label="states">
                                                             {% for state in dropdowns.school_state %}
@@ -115,11 +127,11 @@
                                                         </optgroup>                                                        
                                                     </select>     
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 small clearfix">
                                                     <input class="form-control" type="text" placeholder="Project Subcategory">
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                                <div class="col-md-3 small" >
+                                                    <select id="subcategory" name="subcategory">
                                                         <optgroup label="subcategories">
                                                             {% for subcat in dropdowns.project_subject_subcategories %}
                                                             <option value="{{ subcat }}">{{ subcat }}</option>
@@ -129,21 +141,51 @@
                                                 </div>
                                             </div>
                                             <div class="form-row small">
-                                                <div class="col-md-7">
+                                                <div class="col-md-7 small">
                                                     <input type="text" name="title" placeholder="Project Title">
                                                 </div>
-                                                <div class="col">
+                                                <div class="col small">
                                                     <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
                                                 </div>
                                             </div>
                                             
+                                            <input type="text" name="title" placeholder="Project Title">                                        
+                                            <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
+                                            <label for="grade">Class Grade</label>
+                                            <select id="grade" name="grade">
+                                                <optgroup label="grades">
+                                                    {% for grade in dropdowns.project_grade_category %}
+                                                    <option value="{{ grade }}">{{ grade }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="category">Subject of Research/Classroom Project</label>
+                                            <select id="category" name="category">
+                                                <optgroup label="categories">
+                                                    {% for category in dropdowns.project_subject_categories %}
+                                                    <option value="{{ category }}">{{ category }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="subcategory">Subcategory of Research/Classroom Project</label>
+                                            <select id="subcategory" name="subcategory" style="max-height: 300px; overflow-y: auto;">
+                                                <optgroup label="subcategories">
+                                                    {% for subcat in dropdowns.project_subject_subcategories %}
+                                                    <option value="{{ subcat }}">{{ subcat }}</option>
+                                                    {% endfor %}
+                                                </optgroup>
+                                            </select><br /><br />
+                                            <label for="state">State</label>
+                                            <select id="state" name="state">
+                                                <optgroup label="states">
+                                                    {% for state in dropdowns.school_state %}
+                                                    <option value="{{ state }}">{{ state }}</option>
+                                                    {% endfor %}
+                                                </optgroup>                                                        
+                                            </select>     
                                         </fieldset>
                                         <fieldset>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <legend><span class="number">2</span> ADD ITEMS:</legend>
-                                                </div>
-                                            </div>
+                                        <legend><span class="number">2</span> ADD ITEMS:</legend>
                                         
                                             <p>Please enter items you are requesting...</p>
                                             <input id="item" type="text" placeholder="Item" />
@@ -158,23 +200,23 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-row">
-                                        <div class="col">
+                                        <div class="col small">
                                             <legend><span class="number">3</span> ESSAY:</legend>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="col">
+                                        <div class="col small">
                                             <legend><span class="number">1</span>Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful.</legend>
                                         </div>
-                                        <div class="col">
+                                        <div class="col small">
                                             <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="col">
+                                        <div class="col small">
                                             <legend><span class="number">2</span>About your project: How will these materials make a difference in your students' learning and improve their school lives?</legend>
                                         </div>
-                                        <div class="col">
+                                        <div class="col small">
                                             <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
                                         </div>
                                     </div>
@@ -183,7 +225,6 @@
                                 </form>
                                 </div>
                             </div>
-                        </div>
                 </div>
             </section>
         <!-- End form Area -->
@@ -197,7 +238,6 @@
         <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../static/js/script.js"></script>
-        <!-- <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
         <script class="jsbin" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 
      

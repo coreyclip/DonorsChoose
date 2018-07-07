@@ -2,11 +2,9 @@
 
 <html lang="en-us">
     <head>
-        <!--Site Name-->
-        <title>Donors Choose</title>
+        <title>Donors Choose - Results</title>
         <meta charset="UTF-8">
         
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--CSS-->
         <link rel="stylesheet" href="../static/css/linearicons.css">
         <link rel="stylesheet" href="../static/css/font-awesome.min.css">
@@ -18,18 +16,19 @@
         <link rel="stylesheet" href="../static/css/d3Style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-        <!--fonts-->
+        <!--FONTS-->
         <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
     </head>
 
     <body>
-    <!--page loader-->
+    <!--PAGE LOADER-->
             <div class="spinner-wrapper">
                 <div class="spinner"></div>
             </div>
 
-    <!--start header-->
+    <!--HEADER-->
         <header class="default-header">
             <div class="container">
                 <div class="header-wrap">
@@ -49,21 +48,22 @@
                 </div>
             </div>
         </header>
-    <!--end header-->
 
-<!--start counter-->
-<section class="facts-area pt-100 pb-100">
+
+<!--COUNTER/RESULTS-->
+<section class="facts-area">
     <div class="container">
-        <div class="row">
-            <div class="col center single-fact">
+        <div class="row fullscreen align-items-center justify-content-center">
+            <div class="col-md-auto" style="padding-right: 50px;">
                 <h1 class="counter", id='prediction'  style="display:inline; font-size: 200px">{{pred}}</h1><h1 style="display:inline; font-size: 150px">%</h1>
                 <p class="text-uppercase">Chances of Funding Approval</p>
             </div>
+
         </div>
  </section>
         <div class="row">
 
-                <div class="col-lg-10 col-md-6">
+                <div class="col-lg-10 col-md-6 text-uppercase", style="padding-left: 50px">
                         <h3>About Your Results</h3>
                         <p>
                             Overall about 84% of all applications on DonorsChoose.org eventually get funded before they expire in 4 weeks.  
@@ -79,33 +79,15 @@
                             {{grade_report}}
                         </p>
                 </div>
-        </div>
-                
-        <div class='row'>
-            <h3 class='bold center'>Most Frequent phrases across all applications</h3>
-            <div class="col-lg-4 col-md-6">
-                <h5 class='bold center'>resources</h5>
-                <img src='../static/images/resources.png' alt='resources word cloud', height=40%, width='50%'>
-            </div>
-            
-            <div class="col-lg-4 col-md-6">
-                <h5 class='bold center'>essays</h5>                    
-                    <img src='../static/images/Essays.png' alt='resources word cloud', height=40%, width='50%'>
-                </div>
-            <div class="col-lg-4 col-md-6">
-                <h5 class='bold center'>project titles</h5>                    
-                    <img src='../static/images/project_titles.png' alt='resources word cloud', height=40%, width='50%'>
-                </div>
-        </div>
 
-
+        </div>
 <div class="row">
 
- <div class='col-lg-10 col-md-6'>
+ <div class='col-lg-10 col-md-6', style="padding-left: 50px">
 
         <a href="/chart.html">
             <button class="primary-btn2 mt-20 text-uppercase ">
-                Explore the relationships in the data...<span class="lnr lnr-arrow-right"></span>
+                Explore the relationships in the data in this interactive chart<span class="lnr lnr-arrow-right"></span>
                 
             </button></a>
  </div>                   
@@ -116,6 +98,76 @@
 
 <!--end counter-->
 
+<!--WORD CLOUD-->
+<section class="feature-area section-gap">
+    <div class="container">
+        <div class="row" style="display: flex;">
+            <div class="col-lg-5">
+                <div class="flex-row">
+                    <h1 style="font-family: 'Julius Sans One', sans-serif;">MOST FREQUENT PHRASES...</h1>
+                    <p>Sometimes, the same words come in our mind to explain such an amazing project or class. In this word cloud, 
+                    we display just some of the common words or phrases in many applications on DonorsChoose.org. Click on the photo to take 
+                    a look and see if some of your words are in there!
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                    <img id="myImg" src='../static/images/resource_wordcloud.jpg' alt='resources word cloud', style="width: 100%;">
+                    <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                            <!-- The Close Button -->
+                            <span class="close">&times;</span>
+                        
+                            <!-- Modal Content (The Image) -->
+                            <img class="modal-content" id="img01">
+                        
+                            <!-- Modal Caption (Image Text) -->
+                            <div id="caption"></div>
+                        </div>
+                    <img id="myImg" src='../static/images/project_titles.png' alt='titles word cloud', style="width: 100%;">
+                    <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                            <!-- The Close Button -->
+                            <span class="close">&times;</span>
+                        
+                            <!-- Modal Content (The Image) -->
+                            <img class="modal-content" id="img01">
+                        
+                            <!-- Modal Caption (Image Text) -->
+                            <div id="caption"></div>
+                        </div>
+                    <img id="myImg" src='../static/images/Essays.png' alt='Essays word cloud', style="width: 100%;">
+                        <!-- The Modal -->
+                            <div id="myModal" class="modal">
+                                <!-- The Close Button -->
+                                <span class="close">&times;</span>
+                            
+                                <!-- Modal Content (The Image) -->
+                                <img class="modal-content" id="img01">
+                            
+                                <!-- Modal Caption (Image Text) -->
+                                <div id="caption"></div>
+                            </div>
+            </div>
+            
+            <div class="col-xs-12  col-md-9 col-md-offset-0">
+                    <div class="iframeContainer">
+                        <iframe width="600" height="500">
+                                <div id='graph'></div>
+                        </iframe>
+                        <!-- Students: Add a responsive iframe here that includes the d3.html file -->
+                        <iframe src="stddevthermometer.html" width="1100" height="600"></iframe>  
+                    </div>
+                </div>   
+
+
+        </div>
+    </div>
+</section>
+
+
+
+</section>
 
         <script src="../static/js/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -128,24 +180,6 @@
         <script src="../static/js/waypoints.min.js"></script>
         <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page -->
         <script src="../static/js/jquery.magnific-popup.min.js"></script>
-  
-
-        <!-- Loading Screen -->
-        <script>
-            $(document).ready(function() {
-            //Preloader
-            $(window).on("load", function() {
-            preloaderFadeOutTime = 800;
-            function hidePreloader() {
-            var preloader = $('.spinner-wrapper');
-            preloader.fadeOut(preloaderFadeOutTime);
-            }
-            hidePreloader();
-            });
-            });
-        </script>
 
     </body>
- 
-    
-    </html>
+ </html>
