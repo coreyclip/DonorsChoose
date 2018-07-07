@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <style>
+            svg {
+                margin-top: 50px;
+                margin-left:50px;
+                }</style>
+    </head>
+    <body>
+
+        <svg></svg>
+
+<script>
+console.log('debug1')
+// Start the Create a Bar Graph SVG
+// Get user Standard Deviation Input
+let userInput = 3000;
+
+// Set the size of the SVG area
+let svgWidth = 500, svgHeight = 500, barPadding = 5;
+let barWidth = 50;
+
+// Define value of the bars
+let dataset = [6129, userInput];
+
+// Scale the size of the bars to the dataset
+let xScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, svgWidth]);
+
+let yScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, svgHeight]);
+
+// Create the Axes
+/* let x_axis = d3.axisBottom()
+    .scale(xScale);  */
+
+// Select the SVG element and move the chart within the SVG Ara
+let svg = d3.select('svg')
+    .attr('transform', "translate(100, 10)")
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
+// Create the Y Axis
+
+let yAxisScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([svgHeight, 0])
+
+let y_axis = d3.axisLeft()
+    .scale(yAxisScale)
+    
+svg.append("g")
+    .attr('transform', "translate(50, -2)")
+    .call(y_axis);
+
+let xAxisTranslate = svgHeight -20;
+
+let colorList = ['#a921b8','#ef5f3c']
+let legendText = ['Range of Standard Deviations', 'Current Standard Deviation', 'Avg Std Mean']
+let barWidthList = [50, 20]
+let radiusList = [30, 10]
+let barChart = svg.selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append('rect')
+    .attr('y', function(d) { return svgHeight - yScale(d) })
+    .attr('height', function(d) { return d })
+    .attr('width', function(d, i) {
+        let adjustedWidth = barWidthList[i] - barPadding
+        return adjustedWidth})
+    .attr('fill-opacity', '1')
+    .attr('fill', function(d, i) { return colorList[i]})
+    .attr('rx', function(d, i) { return radiusList[i]})
+    .attr('ry', function(d, i) { return radiusList[i]})
+    .attr('transform', function(d, i) { 
+        let translate = [i * 15 + 60, 0];
+        return "translate(" + translate + ")";
+    });
+
+let labels = svg.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) { return d;})
+    .attr('y', function(d) { return svgHeight - d - 2 })
+    .attr('x', function(d, i) { return barWidth * i})
+ /*    .attri('transform', function (d, i){
+        let translate = [] */
+
+// Start the Legend
+
+let legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("height", 100)
+    .attr("width", 100)
+    .attr('transform', 'translate(-20,50)');
+
+
+legend.selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x", svgWidth - 313)
+    .attr("y", function(d, i) {
+        return i * 20;
+    })
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", function(d, i) {
+        let color = colorList[i];
+        return color;
+    });
+
+legend.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append("text")
+    .attr("x", svgWidth - 300)
+    .attr("y", function(d, i) {
+        return i * 20 + 9;
+    })
+    .text(function(d, i) {
+        let text = legendText[i];
+        return text;
+    });
+    
+
+console.log('debug2')
+</script>
+
+</body>
+</html>
