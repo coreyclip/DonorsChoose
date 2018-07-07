@@ -25,8 +25,8 @@
 
     <body>
             <div class="spinner-wrapper">
-                    <div class="spinner"></div>
-                    </div>
+                <div class="spinner"></div>
+            </div>
     
     <!--start header-->
         <header class="default-header">
@@ -38,9 +38,9 @@
                         </div>
                         <div class="main-menubar d-flex align-items-center">
                             <nav class="hide">
-                                    <a href="index.html">Home</a>
-                                    <a href="aboutus.html">About Us</a>
-                                    <a href="form.html">Get Your Project Funded</a>
+                                <a href="index.html">Home</a>
+                                <a href="aboutus.html">About Us</a>
+                                <a href="form.html">Get Your Project Funded</a>
                             </nav>
                             <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
                         </div>
@@ -57,15 +57,85 @@
                                 <div class="form-style-5">
                                     <form method=POST enctype=multipart/form-data>
                                         <fieldset>
-                                            <legend><span class="number">1</span> CANDIDATE INFO:</legend>
-
-                                            <select id="prefix" name="prefix">
-                                                <optgroup label="prefixes">
-                                                    {% for prefix in dropdowns.teacher_prefix %}
-                                                    <option value="{{ prefix }}">{{ prefix }}</option>
-                                                    {% endfor %}
-                                                </optgroup>
-                                            </select>
+                                            <!-- <div class="form-row"> -->
+                                                <div class="col">
+                                                    <legend><span class="number">1</span> CANDIDATE INFO:</legend>
+                                                </div>
+                                            <!-- </div> -->
+                                            <div class="form-row small">
+                                                <div class="col-md-2 small">
+                                                    <select id="prefix" name="prefix" class="form-control">
+                                                        <optgroup label="prefixes">
+                                                            {% for prefix in dropdowns.teacher_prefix %}
+                                                            <option value="{{ prefix }}">{{ prefix }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-10 small">    
+                                                    <input type="text" name="name" placeholder="Name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-row small">
+                                                <div class="col-md-3 small">
+                                                    <input class="form-control" type="text" placeholder="Class Grade" readonly>
+                                                </div>
+                                                <div class="col-md-3 small">
+                                                    <select id="grade" name="grade">
+                                                        <optgroup label="grades">
+                                                            {% for grade in dropdowns.project_grade_category %}
+                                                            <option value="{{ grade }}">{{ grade }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 small">
+                                                    <input class="form-control" type="text" placeholder="Project Subject" readonly>
+                                                </div>
+                                                <div class="col-md-3 small">
+                                                    <select id="category" name="category">
+                                                        <optgroup label="categories">
+                                                            {% for category in dropdowns.project_subject_categories %}
+                                                            <option value="{{ category }}">{{ category }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row small">
+                                                <div class="col-md-3 small">
+                                                    <input class="form-control" type="text" placeholder="State">
+                                                </div>
+                                                <div class="col-md-3 small">
+                                                    <select id="state" name="state">
+                                                        <optgroup label="states">
+                                                            {% for state in dropdowns.school_state %}
+                                                            <option value="{{ state }}">{{ state }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>                                                        
+                                                    </select>     
+                                                </div>
+                                                <div class="col-md-3 small clearfix">
+                                                    <input class="form-control" type="text" placeholder="Project Subcategory">
+                                                </div>
+                                                <div class="col-md-3 small" >
+                                                    <select id="subcategory" name="subcategory">
+                                                        <optgroup label="subcategories">
+                                                            {% for subcat in dropdowns.project_subject_subcategories %}
+                                                            <option value="{{ subcat }}">{{ subcat }}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row small">
+                                                <div class="col-md-7 small">
+                                                    <input type="text" name="title" placeholder="Project Title">
+                                                </div>
+                                                <div class="col small">
+                                                    <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
+                                                </div>
+                                            </div>
                                             
                                             <input type="text" name="title" placeholder="Project Title">                                        
                                             <input type="number" name="projects" id="projects" value="" placeholder="Number of Previously Posted Projects" />
@@ -117,9 +187,27 @@
                                       </div>
                                 </fieldset>
                                 <fieldset>
-                                    <legend><span class="number">3</span> ESSAY:</legend>
-                                    <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
-                                    <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                    <div class="form-row">
+                                        <div class="col small">
+                                            <legend><span class="number">3</span> ESSAY:</legend>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col small">
+                                            <legend><span class="number">1</span>Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful.</legend>
+                                        </div>
+                                        <div class="col small">
+                                            <textarea name="essay1" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col small">
+                                            <legend><span class="number">2</span>About your project: How will these materials make a difference in your students' learning and improve their school lives?</legend>
+                                        </div>
+                                        <div class="col small">
+                                            <textarea name="essay2" placeholder="Paste or Write Your Essay Here..." style="margin-top:0px; margin-bottom: 30px; height:206px"></textarea>
+                                        </div>
+                                    </div>
                                 </fieldset>
                                 <input type="submit" value="See Your Results..." />
                                 </form>
