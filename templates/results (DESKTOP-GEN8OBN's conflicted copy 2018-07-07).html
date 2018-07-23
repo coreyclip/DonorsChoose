@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+        <!--Site Name-->
+        <title>Donors Choose</title>
+        <meta charset="UTF-8">
+        
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--CSS-->
+        <link rel="stylesheet" href="../static/css/linearicons.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/css/nice-select.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+
+    <body>
+            <div class="spinner-wrapper">
+                    <div class="spinner"></div>
+                    </div>
+
+    <!--start header-->
+        <header class="default-header">
+            <div class="container">
+                <div class="header-wrap">
+                    <div class="header-top d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="../static/images/logo.png" alt="logo" style="width:300px;"></a>
+                        </div>
+                        <div class="main-menubar d-flex align-items-center">
+                            <nav class="hide">
+                                    <a href="index.html">Home</a>
+                                    <a href="aboutus.html">About Us</a>
+                                    <a href="form.html">Get Your Project Funded</a>
+                            </nav>
+                            <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--end header-->
+
+<!--start counter-->
+<section class="facts-area pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 single-fact">
+                <h2 class="counter", id='prediction'>{{pred}} %</h2>
+                <p class="text-uppercase">Chances of Funding Approval</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h3>About Your Results</h3>
+                <p>
+                    Overall about 84% of all applications on DonorsChoose.org eventually get funded.  
+                    Most projects on DonorsChoose.org are between <$1K and $4K, with projects costing less having a greater chance of being funded. 
+                    Your subject {{subject_message}} 
+                    Your Grade Level {{}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class='containter'>
+        <div class='row'>
+            <div class="col-lg-3 col-md-6 single-fact">
+                <h3 class='bold'>Most Frequent phrases across all applications</h3>
+                <img src='../static/images/resource_wordcloud.jpg' alt='resources word cloud', height=40%, width='80%'>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row">
+        <div class="col-xs-12  col-md-9 col-md-offset-0">
+            <div class="iframeContainer">
+                <iframe src="/chart.html" width="1100" height="600">
+                </iframe>
+                <!-- Students: Add a responsive iframe here that includes the d3.html file -->
+            </div>
+        </div>
+    </div>
+<section class="facts-area pt-100 pb-100">
+    <div class= 'col-lg-3 col-md-6 single-fact'>
+        <h3>Chart 1</h3>
+        <hr>
+            <div class='chart1'></div>
+        <hr>
+    </div>
+
+</section>
+<!--end counter-->
+
+
+        <script src="../static/js/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script> <!--Bootstrap-->
+        <script src="../static/js/jquery.nice-select.min.js"></script> <!--Dropdown for nav-bar-->
+        <script src="../static/js/jquery.sticky.js"></script> <!--sticky nav-bar-->
+        <script src="../static/js/parallax.min.js"></script> <!--Scroll effect-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../static/js/script.js"></script>
+        <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/js/waypoints.min.js"></script>
+        <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page-->
+        <script src="../static/js/jquery.magnific-popup.min.js"></script>
+
+        <!-- Loading Screen -->
+                <script>
+                    $(document).ready(function() {
+                    //Preloader
+                    $(window).on("load", function() {
+                    preloaderFadeOutTime = 1500;
+                    function hidePreloader() {
+                    var preloader = $('.spinner-wrapper');
+                    preloader.fadeOut(preloaderFadeOutTime);
+                    }
+                    hidePreloader();
+                    });
+                    });
+        </script>
+    </body>
+ 
+    </html>
