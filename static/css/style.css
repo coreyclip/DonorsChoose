@@ -2500,7 +2500,7 @@ nav a:hover {
             border: none;
         }
         .form-style-5 legend {
-            font-size: 1.4em;
+        
             margin-bottom: 10px;
         }
         .form-style-5 label {
@@ -2690,4 +2690,10 @@ article, aside, figure, footer, header, hgroup,
 
 .small {
   padding-top: 10px;
+}
+
+.fieldlabels {
+  color: #777777;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
 }
