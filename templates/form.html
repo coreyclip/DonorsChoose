@@ -51,16 +51,16 @@
 
         <!-- start form Area -->
         <section class="banner-area relative" id="home">
-                <div class="container">
+                <div class="container" style="margin-top:400px;">
                         <div class="row fullscreen align-items-center justify-content-center">
                             <div class="banner-content col-md-12">
                                 <div class="form-style-5">
                                     <form method=POST enctype=multipart/form-data>
                                         <fieldset>
                                             <div class="form-row">
-                                                <div class="col">
-                                                    <legend><span class="number">1</span> CANDIDATE INFO:</legend>
-                                                </div>
+                                                
+                                                    <legend style="margin-top:40px"><span class="number">1</span> CANDIDATE INFO:</legend>
+                                                
                                             </div>
                                             <div class="form-row small">
                                                 <div class="col-md-2 small">
@@ -146,18 +146,21 @@
                                         </fieldset>
                                         <fieldset>
                                             <div class="form-row">
-                                                <div class="col">
+                                                
                                                     <legend><span class="number">2</span> ADD ITEMS:</legend>
-                                                </div>
+                                                
                                             </div>
-                                        
-                                            <p>Please enter items you are requesting...</p>
+
+                                            <div class="form-row">
+                                                <p>Please enter items you are requesting...</p>
                                             <input id="item" type="text" placeholder="Item" />
                                             <input id="price" type="number" placeholder="Price" />
                                             <input id="quantity" type="number" placeholder="Quantity" />
                                             <input type="button" value="Save/Show" onclick="insert()" />
                                             <input id="priceform" type="text" name="price" value="" style="visibility: hidden;">
                                             <input id="quantityform" type="text" name="quantity" value="" style="visibility: hidden;">
+                                            </div>
+                                            
                                         
                                       <div id="display">
                                       </div>
