@@ -27,5 +27,8 @@ static/js/.DS_Store
 .DS_Store
 static/.DS_Store
 *.pyc
+<<<<<<< HEAD
 __pycache__/report.cpython-36.pyc
 __pycache__/report.cpython-36.pyc
+=======
+>>>>>>> kevin
