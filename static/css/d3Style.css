@@ -4,6 +4,8 @@
  body{
     font-size: 18px;
     font-family: 'Barlow Condensed', sans-serif;
+    margin-left: 10%;
+    margin-right: 10%
   }
   
   .axis-text-x {
