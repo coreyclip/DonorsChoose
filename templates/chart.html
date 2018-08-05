@@ -18,11 +18,6 @@
     costs but relatively high rates of approval as well. DC has very high average project costs but lower than average project approval rates. When toggled to compare 
     average project costs and average word counts in essays we can see something of a positive correlation between increasing word counts and project costs. 
   </p>
-  <a href="javascript:history.back()">
-    <button class="primary-btn2 mt-20 text-uppercase ">
-        Back to results..<span class="lnr lnr-arrow-right"></span>
-        
-    </button></a>
   <div id='graph' style="padding:10%"></div>
 <script>
 
@@ -62,12 +57,12 @@ d3.csv('static/data/census_data.csv', function(err, data){
 
     //Parse Data as numbers
     data.forEach(function(data){
-        data.approve = +data.approve;
         data.medianIncome = +data.medianIncome;
-        data.projects = +data.projects;
         data.totalHouseholds = +data.totalHouseholds;
-        data.total_essay_wc = +data.total_essay_wc;
         data.total_price = +data.total_price
+        data.approve = +data.approve;
+        data.total_essay_wc = +data.total_essay_wc;
+        data.projects = +data.projects;
         //data.states = string(data.states);
     });
     
@@ -311,8 +306,8 @@ d3.selectAll(".y-axis-text").on('click', function(){
     console.log("this has been clicked: ", clickedSelection)
 
     // get current x axis
-    let CurrentXaxis = d3.selectAll(".x-axis-text").filter(".active").attr('csv-column-name')
-    console.log("current x axis status",CurrentXaxis)
+    let CurrentYaxis = d3.selectAll(".y-axis-text").filter(".active").attr('csv-column-name')
+    console.log("current y axis status",CurrentYaxis)
 
 
     if (clickedSelection.classed('inactive')){
@@ -360,9 +355,52 @@ d3.selectAll(".y-axis-text").on('click', function(){
             labelChangeY(clickedSelection);
     };
 })
+// on loading the page
+let startX = d3.selectAll('.x-axis-text').filter('.active').attr('csv-column-name')
+let startY = d3.selectAll('.y-axis-text').filter('.active').attr('csv-column-name')
 
+xScale.domain([
+               d3.min(data, d => d[startX])
+               - d3.deviation(data, d => d[startX]) / 2,
+               d3.max(data, d => d[startX])
+]);
+yScale.domain([
+               d3.min(data, d => d[startY])
+               - d3.deviation(data, d => d[startY]) / 2,
+               d3.max(data, d => d[startY])
+]);
 
+let xStartAxis = d3.axisBottom(xScale);
+let yStartAxis = d3.axisLeft(yScale);
 
+// Render the axes
+svg.select('.x-axis')
+    .call(xStartAxis);
+svg.select('.y-axis')
+    .call(yStartAxis);
+
+// Coords for our starting circle
+d3.selectAll('circle')
+    .attr('cx', function (d) {
+      console.log('Start Circle X Coord', d[startX])
+      return xScale(d[startX]);
+    });
+d3.selectAll('circle')
+    .attr('cy', function (d) {
+      console.log('Start Circle Y Coord', d[startY])
+      return yScale(d[startY]);
+    });
+
+// Place the abbreviations
+d3.selectAll('.abbr')
+  .attr('x', function (d) {
+    return xScale(d[startX]);
+  });
+d3.selectAll('abbr')
+  .attr('y', function(d) {
+    return yScale(d[startY]);
+  });
+ 
 
 });
 
