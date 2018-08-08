@@ -26,7 +26,7 @@
 
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Approval By State</h4>' +  (props ?
-			'<b>' + props.name + '</b><br />' + Math.round(props.approval * 100) + ' %'
+			'<b>' + props.name + '</b><br /> <b>' + Math.round(props.approval * 100) + ' %</b>'
 			: 'Hover over a state');
 	};
 
@@ -47,7 +47,7 @@
 
 	function style(feature) {
 		return {
-			weight: 10,
+			weight: 2,
 			opacity: 1,
 			color: 'white',
 			dashArray: '3',
@@ -60,8 +60,8 @@
 		var layer = e.target;
 
 		layer.setStyle({
-			weight: 10,
-			color: 'black',
+			weight: 5,
+			color: '#666',
 			dashArray: '',
 			fillOpacity: 0.7
 		});
