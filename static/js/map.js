@@ -26,8 +26,10 @@
 
 	info.update = function (props) {
 		this._div.innerHTML = '<h4>Approval By State</h4>' +  (props ?
-			'<b>' + props.name + '</b><br /> <b>' + Math.round(props.approval * 100) + ' %</b>'
+			'<b style="color:black; font-weight: 900">' + props.name + '</b><br /> <b style="color:black; font-weight: 800">' + Math.round(props.approval * 100) + '% approved</b> <br />' + 
+			'<b style="color:black; font-weight: 800">Avg. project cost: $' + Math.round(props.average_price) + '</b>'
 			: 'Hover over a state');
+		
 	};
 
 	info.addTo(map);
