@@ -2697,3 +2697,11 @@ article, aside, figure, footer, header, hgroup,
   font-family: "Poppins", sans-serif;
   font-size: 20px;
 }
+
+#map { 
+  float: left;
+  width: 800px;
+  height: 400px;
+  margin-bottom: 50px;
+    
+}

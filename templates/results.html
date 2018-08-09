@@ -20,6 +20,14 @@
         <link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Permanent+Marker" rel="stylesheet">
+
+        <!-- leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+            integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+            crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin=""></script>
     </head>
 
     <body>
@@ -124,12 +132,15 @@
                             <!-- Modal Caption (Image Text) -->
                             <div id="caption"></div>
                         </div>
-                
-            </div>
-            
-            
 
 
+        </div>
+       
+        <div class='col-lg-9'>
+                <!-- the map -->
+                <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" 
+                tabindex="0" style="position: relative; outline: none;"></div>
+    
         </div>
     </div>
 </section>
@@ -137,6 +148,7 @@
 
 
 </section>
+        
 
         <script src="../static/js/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -149,6 +161,8 @@
         <script src="../static/js/waypoints.min.js"></script>
         <script src="../static/js/jquery.counterup.min.js"></script> <!--Counter Animation for Results page -->
         <script src="../static/js/jquery.magnific-popup.min.js"></script>
+        <script src="../static/js/us-states.js"></script>
+        <script src='../static/js/map.js'></script>
 
     </body>
  </html>
